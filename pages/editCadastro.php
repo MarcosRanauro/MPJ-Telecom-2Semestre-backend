@@ -4,36 +4,25 @@ if (!empty($_GET['id'])) {
 
     $id = $_GET['id'];
 
-    $sqlSelect = "SELECT * FROM usuarios WHERE id = '$id'";
-    $result = $conexao->query($sqlSelect);
-    // print_r($result);
+    $sqlSelect = "SELECT * FROM usuarios WHERE id = :id";
+    $stmt = $pdo->prepare($sqlSelect);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
 
-    if ($result->num_rows > 0) {
-        while ($user_data = mysqli_fetch_assoc($result)) {
-            $nome = $user_data['usu_nome'];
-            $dataNascimento = $user_data['usu_dataNasc'];
-            $sexo = $user_data['usu_sexo'];
-            $nomeMaterno = $user_data['usu_nomeMaterno'];
-            $cpf = $user_data['usu_cpf'];
-            $cellPhone = $user_data['usu_celular'];
-            $phone = $user_data['usu_telefoneFixo'];
-            $endereco = $user_data['usu_endereco'];
-            $loginName = $user_data['usu_login'];
-            $password = $user_data['usu_senha'];
-            $confirmPassword = $user_data['usu_confirmarSenha'];
-            $tipoUsuario = $user_data['tipo_usuario'];
-        }
-        // print_r($nome);
-        // print_r($dataNascimento);
-        // print_r($sexo);
-        // print_r($nomeMaterno);
-        // print_r($cpf);
-        // print_r($cellPhone);
-        // print_r($phone);
-        // print_r($endereco);
-        // print_r($loginName);
-        // print_r($password);
-        // print_r($confirmPassword);
+    if ($stmt->rowCount() > 0) {
+        $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $nome = $user_data['usu_nome'];
+        $dataNascimento = $user_data['usu_dataNasc'];
+        $sexo = $user_data['usu_sexo'];
+        $nomeMaterno = $user_data['usu_nomeMaterno'];
+        $cpf = $user_data['usu_cpf'];
+        $cellPhone = $user_data['usu_celular'];
+        $phone = $user_data['usu_telefoneFixo'];
+        $endereco = $user_data['usu_endereco'];
+        $loginName = $user_data['usu_login'];
+        $password = $user_data['usu_senha'];
+        $confirmPassword = $user_data['usu_confirmarSenha'];
+        $tipoUsuario = $user_data['tipo_usuario'];
     } else {
         header('Location: perfilMaster.php');
     }
@@ -153,56 +142,56 @@ if (!empty($_GET['id'])) {
                     <label for="cell-phone" class="col-form-label">Telefone Celular</label>
                     <input type="tel" name="cell-phone" id="cell-phone" class="cell-phone form-control" value="<?php echo $cellPhone ?>">
                     <div class=" col-auto">
-                    <span id="passwordHelpInline" class="form-text">
-                        99 99999 9999
-                    </span>
-                </div>
+                        <span id="passwordHelpInline" class="form-text">
+                            99 99999 9999
+                        </span>
+                    </div>
 
-                <label for="phone" class="col-form-label">Telefone Fixo:</label>
-                <input type="tel" id="phone" name="phone" class="phone form-control" value="<?php echo $phone ?>">
+                    <label for="phone" class="col-form-label">Telefone Fixo:</label>
+                    <input type="tel" id="phone" name="phone" class="phone form-control" value="<?php echo $phone ?>">
                     <span id=" passwordHelpInline" class="form-text">
-                99 9999 9999
-                </span>
+                        99 9999 9999
+                    </span>
 
-                <label class="col-form-label" for="endereco">Endereço:</label>
-                <input class="form-control" type="text" id="endereco" name="endereco" placeholder="Rua, número, bairro, etc." required value="<?php echo $endereco ?>">
+                    <label class="col-form-label" for="endereco">Endereço:</label>
+                    <input class="form-control" type="text" id="endereco" name="endereco" placeholder="Rua, número, bairro, etc." required value="<?php echo $endereco ?>">
 
                     <label for=" login-name" class="col-form-label">Nome de Login</label>
-                <input type="login-name" name="login-name" id="login-name" class="login form-control" value="<?php echo $loginName ?>">
+                    <input type="login-name" name="login-name" id="login-name" class="login form-control" value="<?php echo $loginName ?>">
                     <div class=" col-auto">
-                <span id="passwordHelpInline" class="form-text">
-                    Deve ter exatamente 6 caracteres alfabéticos.
-                </span>
-                </div>
+                        <span id="passwordHelpInline" class="form-text">
+                            Deve ter exatamente 6 caracteres alfabéticos.
+                        </span>
+                    </div>
 
-                <label for="password" class="col-form-label">Senha</label>
-                <input type="text" name="password" id="password" class="password form-control" value="<?php echo $password ?>">
+                    <label for="password" class="col-form-label">Senha</label>
+                    <input type="text" name="password" id="password" class="password form-control" value="<?php echo $password ?>">
                     <div class=" col-auto">
-                <span id="passwordHelpInline" class="form-text">
-                    A senha deve conter 8 caracteres alfabéticos.
-                </span>
-                </div>
-                <span id="password-error" class="error-message"></span>
+                        <span id="passwordHelpInline" class="form-text">
+                            A senha deve conter 8 caracteres alfabéticos.
+                        </span>
+                    </div>
+                    <span id="password-error" class="error-message"></span>
 
-                <label for="confirm-password" class="col-form-label">Confirme sua senha</label>
-                <input type="text" name="confirm-password" id="confirm-password" class="password form-control" value="<?php echo $confirmPassword ?>">
-                <div class="col-auto">
-                    <span id="passwordHelpInline" class="form-text">
-                        A senha deve ser exatamente igual a anterior.
-                    </span>
-                </div>
-                <label for="tipo_usuario" class="col-form-label">Tipo de Usuário</label>
-                <input type="text" name="tipo_usuario" id="tipo_usuario" value="<?php echo $tipoUsuario ?>">
-                
-                <span id="confirm-password-error" class="error-message"></span>
-                <fieldset class="main-agreement">
-                    <label for="agreement" id="label-infos">Você concorda com o uso das informações acima?</label>
-                    <input type="checkbox" name="agreement" id="agreement">
-                </fieldset>
-                <input type="hidden" name="id" value="<?php echo $id ?>">
-                <input type="submit" id="update" class="submit btn btn-primary" name="update">
+                    <label for="confirm-password" class="col-form-label">Confirme sua senha</label>
+                    <input type="text" name="confirm-password" id="confirm-password" class="password form-control" value="<?php echo $confirmPassword ?>">
+                    <div class="col-auto">
+                        <span id="passwordHelpInline" class="form-text">
+                            A senha deve ser exatamente igual a anterior.
+                        </span>
+                    </div>
+                    <label for="tipo_usuario" class="col-form-label">Tipo de Usuário</label>
+                    <input type="text" name="tipo_usuario" id="tipo_usuario" value="<?php echo $tipoUsuario ?>">
 
-                <input type="reset" id="reset-btn" class="reset btn btn-primary" name="reset">
+                    <span id="confirm-password-error" class="error-message"></span>
+                    <fieldset class="main-agreement">
+                        <label for="agreement" id="label-infos">Você concorda com o uso das informações acima?</label>
+                        <input type="checkbox" name="agreement" id="agreement">
+                    </fieldset>
+                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                    <input type="submit" id="update" class="submit btn btn-primary" name="update">
+
+                    <input type="reset" id="reset-btn" class="reset btn btn-primary" name="reset">
                 </div>
 
             </form>

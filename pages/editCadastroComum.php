@@ -4,30 +4,33 @@ if (!empty($_GET['id'])) {
 
   $id = $_GET['id'];
 
-  $sqlSelectComum = "SELECT * FROM usuarios WHERE id = '$id'";
-  $resultComum = $conexao->query($sqlSelectComum);
+  // Prepare a consulta SQL
+  $sqlSelectComum = "SELECT * FROM usuarios WHERE id = :id";
+  $stmt = $pdo->prepare($sqlSelectComum);
+  $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+  $stmt->execute();
 
-  if ($resultComum->num_rows > 0) {
-    while ($user_data_comum = mysqli_fetch_assoc($resultComum)) {
-      $id = $user_data_comum['id'];
-      $nome = $user_data_comum['usu_nome'];
-      $dataNascimento = $user_data_comum['usu_dataNasc'];
-      $sexo = $user_data_comum['usu_sexo'];
-      $nomeMaterno = $user_data_comum['usu_nomeMaterno'];
-      $cpf = $user_data_comum['usu_cpf'];
-      $cellPhone = $user_data_comum['usu_celular'];
-      $phone = $user_data_comum['usu_telefoneFixo'];
-      $endereco = $user_data_comum['usu_endereco'];
-      $loginName = $user_data_comum['usu_login'];
-      $password = $user_data_comum['usu_senha'];
-      $confirmPassword = $user_data_comum['usu_confirmarSenha'];
-    }
+  // Verificar se a consulta retornou resultados
+  if ($stmt->rowCount() > 0) {
+    $user_data_comum = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $id = $user_data_comum['id'];
+    $nome = $user_data_comum['usu_nome'];
+    $dataNascimento = $user_data_comum['usu_dataNasc'];
+    $sexo = $user_data_comum['usu_sexo'];
+    $nomeMaterno = $user_data_comum['usu_nomeMaterno'];
+    $cpf = $user_data_comum['usu_cpf'];
+    $cellPhone = $user_data_comum['usu_celular'];
+    $phone = $user_data_comum['usu_telefoneFixo'];
+    $endereco = $user_data_comum['usu_endereco'];
+    $loginName = $user_data_comum['usu_login'];
+    $password = $user_data_comum['usu_senha'];
+    $confirmPassword = $user_data_comum['usu_confirmarSenha'];
   } else {
     header('Location: perfil.php');
   }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
