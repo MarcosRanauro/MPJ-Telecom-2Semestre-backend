@@ -8,6 +8,6 @@
 <body>
   <h1>Erro de autenticação de dois fatores!</h1>
   <h2>Volte para a autenticação</h2>
-  <a href="2ffa.php">Voltar</a>
+  <a href="Login.php">Voltar</a>
 </body>
 </html>

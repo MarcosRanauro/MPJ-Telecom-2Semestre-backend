@@ -23,7 +23,7 @@ if (isset($_POST['submit']) && !empty($_POST['cpf']) && isset($_SESSION['usu_cpf
             // Defina a variável de sessão para indicar que o usuário passou pela autenticação 2FA.
             $_SESSION['autenticado_2fa'] = true;
             $_SESSION['usu_cpf'] = $cpf;
-            header('Location: perfil.php');
+            header('Location: ../index.php');
         } else {
             header('Location: erro2ffa.php');
         }
