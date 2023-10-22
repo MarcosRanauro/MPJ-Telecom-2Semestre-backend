@@ -4,36 +4,25 @@ if (!empty($_GET['id'])) {
 
     $id = $_GET['id'];
 
-    $sqlSelect = "SELECT * FROM usuarios WHERE id = '$id'";
-    $result = $conexao->query($sqlSelect);
-    // print_r($result);
+    $sqlSelect = "SELECT * FROM usuarios WHERE id = :id";
+    $stmt = $pdo->prepare($sqlSelect);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
 
-    if ($result->num_rows > 0) {
-        while ($user_data = mysqli_fetch_assoc($result)) {
-            $nome = $user_data['usu_nome'];
-            $dataNascimento = $user_data['usu_dataNasc'];
-            $sexo = $user_data['usu_sexo'];
-            $nomeMaterno = $user_data['usu_nomeMaterno'];
-            $cpf = $user_data['usu_cpf'];
-            $cellPhone = $user_data['usu_celular'];
-            $phone = $user_data['usu_telefoneFixo'];
-            $endereco = $user_data['usu_endereco'];
-            $loginName = $user_data['usu_login'];
-            $password = $user_data['usu_senha'];
-            $confirmPassword = $user_data['usu_confirmarSenha'];
-            $tipoUsuario = $user_data['tipo_usuario'];
-        }
-        // print_r($nome);
-        // print_r($dataNascimento);
-        // print_r($sexo);
-        // print_r($nomeMaterno);
-        // print_r($cpf);
-        // print_r($cellPhone);
-        // print_r($phone);
-        // print_r($endereco);
-        // print_r($loginName);
-        // print_r($password);
-        // print_r($confirmPassword);
+    if ($stmt->rowCount() > 0) {
+        $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $nome = $user_data['usu_nome'];
+        $dataNascimento = $user_data['usu_dataNasc'];
+        $sexo = $user_data['usu_sexo'];
+        $nomeMaterno = $user_data['usu_nomeMaterno'];
+        $cpf = $user_data['usu_cpf'];
+        $cellPhone = $user_data['usu_celular'];
+        $phone = $user_data['usu_telefoneFixo'];
+        $endereco = $user_data['usu_endereco'];
+        $loginName = $user_data['usu_login'];
+        $password = $user_data['usu_senha'];
+        $confirmPassword = $user_data['usu_confirmarSenha'];
+        $tipoUsuario = $user_data['tipo_usuario'];
     } else {
         header('Location: perfilMaster.php');
     }

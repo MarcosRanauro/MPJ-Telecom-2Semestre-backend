@@ -18,7 +18,7 @@
 
     $sqlUpdate = "UPDATE usuarios SET usu_nome = '$nome', usu_dataNasc = '$dataNasc', usu_sexo = '$sexo', usu_nomeMaterno = '$nomeMaterno', usu_cpf = '$cpf', usu_celular = '$celular', usu_telefoneFixo = '$telefoneFixo', usu_endereco = '$endereco', usu_login = '$nomeLogin', usu_senha = '$senha', usu_confirmarSenha = '$confirmarSenha', tipo_usuario = '$tipoUsuario' WHERE id = '$id'";
 
-    $result = $conexao->query($sqlUpdate);
+    $result = $pdo->query($sqlUpdate);
   }
   header('Location: ../pages/perfilMaster.php');
 

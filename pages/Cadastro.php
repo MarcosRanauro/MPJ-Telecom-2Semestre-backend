@@ -43,9 +43,22 @@ if (isset($_POST['submit'])) {
         header("Location: ../components/erro.php?errors=$errorMessages");
         exit; // Encerre o script
     } else {
-        // Não houve erros, prossiga com a inserção no banco de dados
-        $result = mysqli_query($conexao, "INSERT INTO usuarios(usu_nome, usu_dataNasc, usu_sexo, usu_nomeMaterno, usu_cpf, usu_celular, usu_telefoneFixo, usu_endereco, usu_login, usu_senha, usu_confirmarSenha) VALUES ('$nome', '$dataNascimento', '$sexo', '$nomeMaterno', '$cpf', '$cellPhone', '$phone', '$endereco', '$loginName', '$password', '$confirmPassword')");
-        if ($result) {
+        // Não houve erros, prossiga com a inserção no banco de dados usando PDO
+        $sql = "INSERT INTO usuarios(usu_nome, usu_dataNasc, usu_sexo, usu_nomeMaterno, usu_cpf, usu_celular, usu_telefoneFixo, usu_endereco, usu_login, usu_senha, usu_confirmarSenha) VALUES (:nome, :dataNascimento, :sexo, :nomeMaterno, :cpf, :cellPhone, :phone, :endereco, :loginName, :password, :confirmPassword)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $stmt->bindParam(':dataNascimento', $dataNascimento, PDO::PARAM_STR);
+        $stmt->bindParam(':sexo', $sexo, PDO::PARAM_STR);
+        $stmt->bindParam(':nomeMaterno', $nomeMaterno, PDO::PARAM_STR);
+        $stmt->bindParam(':cpf', $cpf, PDO::PARAM_STR);
+        $stmt->bindParam(':cellPhone', $cellPhone, PDO::PARAM_STR);
+        $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
+        $stmt->bindParam(':endereco', $endereco, PDO::PARAM_STR);
+        $stmt->bindParam(':loginName', $loginName, PDO::PARAM_STR);
+        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+        $stmt->bindParam(':confirmPassword', $confirmPassword, PDO::PARAM_STR);
+        
+        if ($stmt->execute()) {
             // Redirecione o usuário para uma página de sucesso
             header("Location: Login.php");
             exit; // Encerre o script
@@ -57,6 +70,7 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -14,11 +14,10 @@
     $nomeLogin = $_POST['login-name'];
     $senha = $_POST['password'];
     $confirmarSenha = $_POST['confirm-password'];
-    $tipoUsuario = $_POST['tipo_usuario'];
 
     $sqlUpdate = "UPDATE usuarios SET usu_nome = '$nome', usu_dataNasc = '$dataNasc', usu_sexo = '$sexo', usu_nomeMaterno = '$nomeMaterno', usu_cpf = '$cpf', usu_celular = '$celular', usu_telefoneFixo = '$telefoneFixo', usu_endereco = '$endereco', usu_login = '$nomeLogin', usu_senha = '$senha', usu_confirmarSenha = '$confirmarSenha' WHERE id = '$id'";
 
-    $result = $conexao->query($sqlUpdate);
+    $result = $pdo->query($sqlUpdate);
   }
   header('Location: ../pages/perfil.php')
 

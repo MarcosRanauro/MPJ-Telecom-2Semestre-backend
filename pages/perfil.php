@@ -4,7 +4,7 @@ session_start();
 
 require_once('../components/tokenFunc.php');
 
-if (!isset($_SESSION['usu_login']) == true && !isset($_SESSION['usu_senha']) == true) {
+if (!isset($_SESSION['usu_login']) && !isset($_SESSION['usu_senha'])) {
   unset($_SESSION['usu_login']);
   unset($_SESSION['usu_senha']);
   header('Location: Login.php');
@@ -28,22 +28,24 @@ $logado_senha = $_SESSION['usu_senha'];
 
 include_once('../components/config.php');
 
-$sql = "SELECT * FROM usuarios WHERE usu_login = '$logado_login' AND usu_senha = '$logado_senha'";
-$result = $conexao->query($sql);
-$result_dadosDB_comum = $conexao->query($sql);
-$user_data_comum = mysqli_fetch_assoc($result_dadosDB_comum);
+$sql = "SELECT * FROM usuarios WHERE usu_login = :logado_login AND usu_senha = :logado_senha";
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(':logado_login', $logado_login, PDO::PARAM_STR);
+$stmt->bindParam(':logado_senha', $logado_senha, PDO::PARAM_STR);
+$stmt->execute();
 
-if ($result && $result->num_rows > 0) {
-  $row = $result->fetch_assoc();
-  $id = $row['id'];
-  $logado_nome = $row['usu_nome'];
-  $logado_dataNasc = $row['usu_dataNasc'];
-  $logado_sexo = $row['usu_sexo'];
-  $logado_nomeMaterno = $row['usu_nomeMaterno'];
-  $logado_cpf = $row['usu_cpf'];
-  $logado_celular = $row['usu_celular'];
-  $logado_telefoneFixo = $row['usu_telefoneFixo'];
-  $logado_endereco = $row['usu_endereco'];
+if ($stmt && $stmt->rowCount() > 0) {
+  $user_data_comum = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  $id = $user_data_comum['id'];
+  $logado_nome = $user_data_comum['usu_nome'];
+  $logado_dataNasc = $user_data_comum['usu_dataNasc'];
+  $logado_sexo = $user_data_comum['usu_sexo'];
+  $logado_nomeMaterno = $user_data_comum['usu_nomeMaterno'];
+  $logado_cpf = $user_data_comum['usu_cpf'];
+  $logado_celular = $user_data_comum['usu_celular'];
+  $logado_telefoneFixo = $user_data_comum['usu_telefoneFixo'];
+  $logado_endereco = $user_data_comum['usu_endereco'];
 } else {
   $logado_nome = "Não encontrado";
   $logado_dataNasc = "Não encontrado";
@@ -54,7 +56,6 @@ if ($result && $result->num_rows > 0) {
   $logado_telefoneFixo = "Não encontrado";
   $logado_endereco = "Não encontrado";
 }
-
 ?>
 
 <!DOCTYPE html>
