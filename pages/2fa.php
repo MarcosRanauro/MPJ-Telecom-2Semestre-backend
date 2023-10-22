@@ -1,3 +1,22 @@
+<?php
+session_start();
+require_once('../components/tokenFunc.php');
+// Nome da chave do token
+$token_key = 'temp_token';
+// Verifique o token (se necessário)
+if (verificarToken($token_key)) {
+    // O usuário está autenticado
+    $usuario_autenticado = true;
+} else {
+    $usuario_autenticado = false;
+}
+
+if (!isset($_SESSION['tipo_usuario'])) {
+    $_SESSION['tipo_usuario'] = ''; // Defina um valor padrão, se necessário
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -23,15 +42,19 @@
                 <li><a class="menu-primario" href="#">Institucional</a></li>
             </ul>
             <ul class="navbar-right">
-                <li><a class="menu-primario" href="#">WhatsApp</a></li>
-                <li><a class="menu-primario" href="#">FAQ</a></li>
-                <li><a class="menu-primario" href="#">Carreiras</a></li>
-                <li><a class="menu-primario" href="#">Contato</a></li>
-                <li><a class="menu-primario" href="#">Português</a></li>
-                <a class="botao-login" href="../pages/Login.php">
-                    <i class="fa-solid fa-user" style="color: #ffffff;"></i>
-                    <button class="botao-login-b">Área do Cliente</button>
-                </a>
+            <?php if ($_SESSION['tipo_usuario']) { ?>
+                <?php require_once('../components/header.php'); ?>
+                <?php } else { ?>
+                    <li><a class="menu-primario" href="#">WhatsApp</a></li>
+                    <li><a class="menu-primario" href="#">FAQ</a></li>
+                    <li><a class="menu-primario" href="#">Carreiras</a></li>
+                    <li><a class="menu-primario" href="#">Contato</a></li>
+                    <li><a class="menu-primario" href="#">Português</a></li>
+                    <a class="botao-login" href="./pages/Login.php">
+                        <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+                        <button class="botao-login-b">Área do Cliente</button>
+                    </a>
+                <?php } ?>
             </ul>
         </section>
 
@@ -69,7 +92,7 @@
                             <li><a class="submenu" href="#">MVNA/E</a></li>
                         </ul>
                     </li>
-                    <li class="navbar"><a class="menu-opcoes" href="./produto.html">CPaaS</a></li>
+                    <li class="navbar"><a class="menu-opcoes" href="./produto.php">CPaaS</a></li>
 
                     <li class="navbar"><a class="menu-opcoes" href="#">Outras soluções</a>
                         <ul>

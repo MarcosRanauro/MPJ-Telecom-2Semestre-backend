@@ -2,7 +2,7 @@
 session_start();
 // print_r($_SESSION);
 
-if (!isset($_SESSION['usu_login']) || !isset($_SESSION['usu_senha']) || !isset($_SESSION['tipo_usuario']) || $_SESSION['tipo_usuario'] !== 'master') {
+if (!isset($_SESSION['usu_login']) == true && !isset($_SESSION['usu_senha']) == true && !isset($_SESSION['tipo_usuario']) == 'master') {
   unset($_SESSION['usu_login']);
   unset($_SESSION['usu_senha']);
   unset($_SESSION['tipo_usuario']);
@@ -12,22 +12,19 @@ if (!isset($_SESSION['usu_login']) || !isset($_SESSION['usu_senha']) || !isset($
 $logado_login = $_SESSION['usu_login'];
 $logado_senha = $_SESSION['usu_senha'];
 
-include_once('../components/config.php');
-
 $required_role = 'master';
 
 if ($_SESSION['role'] !== $required_role) {
   header('Location: perfil.php');
 }
 
-$sql = "SELECT * FROM usuarios WHERE usu_login = :login AND usu_senha = :senha";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':login', $logado_login, PDO::PARAM_STR);
-$stmt->bindParam(':senha', $logado_senha, PDO::PARAM_STR);
-$stmt->execute();
+include_once('../components/config.php');
 
-if ($stmt->rowCount() > 0) {
-  $row = $stmt->fetch(PDO::FETCH_ASSOC);
+$sql = "SELECT * FROM usuarios WHERE usu_login = '$logado_login' AND usu_senha = '$logado_senha'";
+$result = $conexao->query($sql);
+
+if ($result && $result->num_rows > 0) {
+  $row = $result->fetch_assoc();
   $logado_nome = $row['usu_nome'];
   $logado_dataNasc = $row['usu_dataNasc'];
   $logado_sexo = $row['usu_sexo'];
@@ -48,8 +45,10 @@ if ($stmt->rowCount() > 0) {
 }
 
 $sql_dadosDB = "SELECT * FROM usuarios ORDER BY usu_nome";
-$result_dadosDB = $pdo->query($sql_dadosDB);
+$result_dadosDB = $conexao->query($sql_dadosDB);
 // print_r($result_dadosDB);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -101,7 +100,7 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
         </thead>
         <tbody>
           <?php
-          while ($user_data = $result_dadosDB->fetch(PDO::FETCH_ASSOC)) {
+          while ($user_data = mysqli_fetch_assoc($result_dadosDB)) {
             echo "<tr>";
             echo "<td>" . $user_data['id'] . "</td>";
             echo "<td>" . $user_data['usu_nome'] . "</td>";

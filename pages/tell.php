@@ -1,3 +1,22 @@
+<?php
+session_start();
+require_once('../components/tokenFunc.php');
+// Nome da chave do token
+$token_key = 'temp_token';
+// Verifique o token (se necessário)
+if (verificarToken($token_key)) {
+    // O usuário está autenticado
+    $usuario_autenticado = true;
+} else {
+    $usuario_autenticado = false;
+}
+
+if (!isset($_SESSION['tipo_usuario'])) {
+    $_SESSION['tipo_usuario'] = ''; // Defina um valor padrão, se necessário
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -9,6 +28,7 @@
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/produtos.css">
+    <link rel="stylesheet" href="../styles/tell.css">
     <link rel="stylesheet" href="../fontawesome-free-6.4.0-web/css/all.min.css">
     <title>CPaaS MJP</title>
 </head>
@@ -22,15 +42,19 @@
                 <li><a class="menu-primario" href="#">Institucional</a></li>
             </ul>
             <ul class="navbar-right">
-                <li><a class="menu-primario" href="#">WhatsApp</a></li>
-                <li><a class="menu-primario" href="#">FAQ</a></li>
-                <li><a class="menu-primario" href="#">Carreiras</a></li>
-                <li><a class="menu-primario" href="#">Contato</a></li>
-                <li><a class="menu-primario" href="#">Português</a></li>
-                <a class="botao-login" href="../pages/Login.php">
-                    <i class="fa-solid fa-user" style="color: #ffffff;"></i>
-                    <button class="botao-login-b">Área do Cliente</button>
-                </a>
+            <?php if ($_SESSION['tipo_usuario']) { ?>
+                <?php require_once('../components/header.php'); ?>
+                <?php } else { ?>
+                    <li><a class="menu-primario" href="#">WhatsApp</a></li>
+                    <li><a class="menu-primario" href="#">FAQ</a></li>
+                    <li><a class="menu-primario" href="#">Carreiras</a></li>
+                    <li><a class="menu-primario" href="#">Contato</a></li>
+                    <li><a class="menu-primario" href="#">Português</a></li>
+                    <a class="botao-login" href="./pages/Login.php">
+                        <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+                        <button class="botao-login-b">Área do Cliente</button>
+                    </a>
+                <?php } ?>
             </ul>
         </section>
 
@@ -68,7 +92,7 @@
                             <li><a class="submenu" href="#">MVNA/E</a></li>
                         </ul>
                     </li>
-                    <li class="navbar"><a class="menu-opcoes" href="./produto.html">CPaaS</a></li>
+                    <li class="navbar"><a class="menu-opcoes" href="./produto.php">CPaaS</a></li>
 
                     <li class="navbar"><a class="menu-opcoes" href="#">Outras soluções</a>
                         <ul>
@@ -80,83 +104,73 @@
             </nav>
         </section>
     </header>
-    <div class="main-cpaas">
-        <div class="main-cpaas-titulo">
-            <section class="cpaas-titulo">
-                <h1>PLATAFORMA CPAAS</h1>
-                <p>Atualize sua rede com nosso novo serviço voltado para integração dos canais de comunicação.</p>
-                <a href="Login.php">Fale com nossos especialistas</a>
-            </section>
-            <section class="img-inicio-cpaas">
-                <img src="../img/cpaas-inicio.jpg" alt="Essa é uma imagem sobre CPaaS">
-            </section>
-        </div>
-        <div class="main-cpaas-descri">
-            <section class="main-cpaas-descri-pri">
-                <h2>O que é CPaaS?</h2>
-                <p>CPaaS (Comunicações como Serviço, do inglês Communications Platform as a Service) é uma categoria de
-                    serviços em nuvem que oferece recursos de comunicação e colaboração para empresas e desenvolvedores.
-                    O CPaaS permite que as empresas integrem recursos de comunicação, como voz, vídeo, mensagens de
-                    texto e autenticação de dois fatores, em seus aplicativos, serviços ou sistemas existentes por meio
-                    de APIs (Interfaces de Programação de Aplicativos).</p>
-            </section>
-            <section class="main-cpaas-descri-sec">
-                <h2>Pra que serve?</h2>
-                <p>Ao adotar uma solução CPaaS, as empresas podem aproveitar as capacidades de comunicação em tempo real
-                    para melhorar a experiência do cliente, aumentar a eficiência operacional e fornecer canais de
-                    comunicação modernos. Isso inclui recursos como chamadas de voz e vídeo em tempo real, mensagens
-                    instantâneas, notificações por SMS, autenticação de dois fatores, serviços de fax e muito mais. O
-                    CPaaS
-                    tem sido amplamente adotado em diversas indústrias, como atendimento ao cliente, serviços
-                    financeiros,
-                    comércio eletrônico, saúde e muito mais. Ele fornece uma maneira flexível e escalável de adicionar
-                    recursos de comunicação em aplicativos e sistemas, permitindo que as empresas se conectem melhor com
-                    seus clientes e melhorem suas operações comerciais.</p>
-            </section>
-        </div>
-        <div class="h2-benefi"><h2>Serviços</h2></div>
-        <section class="card-beneficios">
-            <div class="card">
-                <img class="img" src="../img/2fa.png" alt="Imagem 1" />
-                <div class="card-text">
-                    <h2>2FA</h2>
-                    <a href="./2fa.html">Saiba Mais</a>
+    <div class="main-produto">
+        <section class="main-produto-back">
+            <div class="main-produto-titulo">
+                <div>
+                    <h2>Number Mask (Número Mascarado)</h2>
+                    <a href="Login.php">Fale com nossos especialistas</a>
                 </div>
+                <img id="nm-principal" src="../img/number-maskingatt.png" alt="Essa é uma imagem de Número Mascarado.">
             </div>
-
-            <div class="card">
-                <img class="tell" src="../img/tell.png" alt="Imagem 2" />
-                <div class="card-text">
-                    <h2>Número Máscara</h2>
-                    <a href="./tell.html">Saiba Mais</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <img class="img" src="../img/email-auto.png" alt="Imagem 3" />
-                <div class="card-text">
-                    <h2>SMS Programável</h2>
-                    <a href="./sms.html">Saiba Mais</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <img class="img" src="../img/verify-call.png" alt="Imagem 4" />
-                <div class="card-text">
-                    <h2>Google Verified Calls</h2>
-                    <a href="./calls.html">Saiba Mais</a>
-                </div>
-
-            </div>
-
         </section>
-
-
-
-
-
-
-
+        <section class="main-produto-descri">
+            <div class="main-produto-descri-texto">
+                <h2>Como Funciona?</h2>
+                <p>O Número Mascarado é um recurso utilizado para proteger a privacidade dos usuários ao fazerem
+                    chamadas telefônicas. Ele funciona como um intermediário entre o chamador e o receptor, ocultando o
+                    número real do chamador e fornecendo um número temporário ou fictício no lugar. Em resumo, o Número
+                    Mascarado é uma ferramenta que ajuda a proteger a privacidade e a segurança dos usuários durante
+                    chamadas telefônicas. Ao ocultar o número real do chamador e fornecer um número temporário, o Number
+                    Mask oferece uma camada adicional de anonimato e controle sobre a comunicação telefônica</p>
+            </div>
+            <img src="../img/number-masking.png" alt="Essa é uma imagem de Número Mascarado.">
+        </section>
+        <section class="main-produto-obj">
+            <img src="../img/Phone-Number-Masking.jpg" alt="Essa é uma imagem de Número Mascarado." id="img-2">
+            <div class="main-produto-obj-texto">
+                <h2>Qual Objetivo?</h2>
+                <p>O principal objetivo do Número Mascarado é preservar a privacidade dos indivíduos, permitindo que
+                    eles façam chamadas sem revelar seu número de telefone pessoal. Isso pode ser útil em várias
+                    situações, como:</p>
+                <ol>
+                    <li>
+                        <h3><i class="fa fa-check-circle" style="color: #047100;" aria-hidden="true"></i>Privacidade do
+                            usuário:</h3> Muitas pessoas preferem manter seu número de telefone pessoal
+                        confidencial ao ligar para empresas, fornecedores, ou até mesmo para desconhecidos. O Number
+                        Mask permite que eles ocultem seu número real e usem um número temporário para manter sua
+                        privacidade.
+                    </li>
+                    <li>
+                        <h3><i class="fa fa-check-circle" style="color: #047100;" aria-hidden="true"></i>Segurança:</h3>
+                        Ao ocultar seu número, os usuários podem evitar possíveis ameaças à segurança,
+                        como assédio telefônico, rastreamento ou até mesmo tentativas de fraude. Ao usar um número
+                        temporário fornecido pelo Number Mask, é mais difícil para pessoas mal-intencionadas obterem
+                        informações pessoais.
+                    </li>
+                    <li>
+                        <h3><i class="fa fa-check-circle" style="color: #047100;" aria-hidden="true"></i>Anonimato em
+                            transações comerciais:</h3> Em transações comerciais online, o Number Mask pode ser
+                        usado para ocultar o número de telefone do vendedor ou comprador. Isso é particularmente
+                        útil em plataformas de comércio eletrônico, onde as partes envolvidas podem querer manter
+                        seu contato pessoal restrito.
+                    </li>
+                    <li>
+                        <h3><i class="fa fa-check-circle" style="color: #047100;" aria-hidden="true"></i>Controle de
+                            comunicação:</h3> O Number Mask também oferece aos usuários maior controle sobre com
+                        quem eles compartilham seus números de telefone. Ao fornecer um número temporário, é
+                        possível limitar a comunicação apenas a determinados períodos de tempo ou bloquear o número
+                        de contato se necessário.
+                    </li>
+                </ol>
+                <p>O funcionamento do Número Mascarado pode variar dependendo da plataforma ou serviço utilizado. Alguns
+                    serviços fornecem números temporários que expiram após um determinado período de tempo ou quantidade
+                    de
+                    chamadas. Outros podem permitir que os usuários personalizem as configurações de privacidade para
+                    cada
+                    chamada individualmente</p>
+            </div>
+        </section>
     </div>
     <footer>
         <section class="container-footer">

@@ -40,13 +40,7 @@ if (!isset($_SESSION['tipo_usuario'])) {
             </ul>
             <ul class="navbar-right">
                 <?php if ($_SESSION['tipo_usuario']) { ?>
-                    <li>Olá, <?php echo $_SESSION['usu_login']; ?></li>
-                    <?php if ($_SESSION['tipo_usuario'] === 'master') { ?>
-                        <li><a href="pages/perfilMaster.php">Meu Perfil</a></li>
-                    <?php } else { ?>
-                        <li><a href="pages/perfil.php">Meu Perfil</a></li>
-                    <?php } ?>
-                    <li><a href="./components/sair.php">Sair</a></li>
+                <?php require_once('./components/headerIndex.php'); ?>
                 <?php } else { ?>
                     <li><a class="menu-primario" href="#">WhatsApp</a></li>
                     <li><a class="menu-primario" href="#">FAQ</a></li>
@@ -63,7 +57,7 @@ if (!isset($_SESSION['tipo_usuario'])) {
 
         <section class="cabecalho-secundario">
             <a href="index.php">
-                <img src="img/mjp-att.png" alt="essa é a logo da MJP" style="height:65px; width:250px">
+                <img src="img/mjp-att.png" alt="essa é a logo da MJP">
             </a>
             <nav class="nav-2">
                 <ul class="menu">
@@ -95,7 +89,7 @@ if (!isset($_SESSION['tipo_usuario'])) {
                             <li><a class="submenu" href="#">MVNA/E</a></li>
                         </ul>
                     </li>
-                    <li class="navbar"><a class="menu-opcoes" href="./pages/produto.html">CPaaS</a></li>
+                    <li class="navbar"><a class="menu-opcoes" href="./pages/produto.php">CPaaS</a></li>
 
                     <li class="navbar"><a class="menu-opcoes" href="#">Outras soluções</a>
                         <ul>
