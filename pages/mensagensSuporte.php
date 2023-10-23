@@ -1,22 +1,17 @@
-<?php 
-  if(isset($_POST['submit'])){
-    include_once('../components/config.php');
+<?php
+include_once('../components/config.php');
+session_start();
 
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $mensagem = $_POST['mensagem'];
+if (!isset($_SESSION['usu_login']) || !isset($_SESSION['usu_senha']) || !isset($_SESSION['tipo_usuario']) || $_SESSION['tipo_usuario'] !== 'master') {
+  unset($_SESSION['usu_login']);
+  unset($_SESSION['usu_senha']);
+  unset($_SESSION['tipo_usuario']);
+  header('Location: Login.php');
+}
 
-    $sql = "INSERT INTO suporte_contato (nome, email, mensagem) VALUES (:nome, :email, :mensagem)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt->bindParam(':mensagem', $mensagem, PDO::PARAM_STR);
-    $stmt->execute();
-    header('Location: Login.php');
-    exit();
-  }
+$sql_dados_suporte = "SELECT * FROM suporte_contato ORDER BY nome ASC";
+$result_dados_suporte = $pdo->query($sql_dados_suporte);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,10 +20,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="../styles/2ffa.css">
-  <link rel="stylesheet" href="../styles/inativo.css">
+  <link rel="stylesheet" href="../styles/mensagemSuporte.css">
   <link rel="stylesheet" href="../fontawesome-free-6.4.0-web/css/all.min.css">
-  <title>Perfil Inativo</title>
+  <title>Mensagens Suporte</title>
 </head>
 
 <body>
@@ -40,15 +34,19 @@
         <li><a class="menu-primario" href="#">Institucional</a></li>
       </ul>
       <ul class="navbar-right">
+        <?php if ($_SESSION['tipo_usuario']) { ?>
+          <?php require_once('../components/header.php'); ?>
+        <?php } else { ?>
           <li><a class="menu-primario" href="#">WhatsApp</a></li>
           <li><a class="menu-primario" href="#">FAQ</a></li>
           <li><a class="menu-primario" href="#">Carreiras</a></li>
           <li><a class="menu-primario" href="#">Contato</a></li>
           <li><a class="menu-primario" href="#">Português</a></li>
-          <a class="botao-login" href="Login.php">
+          <a class="botao-login" href="./pages/Login.php">
             <i class="fa-solid fa-user" style="color: #ffffff;"></i>
             <button class="botao-login-b">Área do Cliente</button>
           </a>
+        <?php } ?>
       </ul>
     </section>
 
@@ -98,24 +96,32 @@
       </nav>
     </section>
   </header>
-  <main>
-  <h1>Seu perfil está inativo, favor entrar em contato com o suporte.</h1>
-  <form action="inativo.php" method="POST">
-    <span>
-      Nome completo:
-      <input type="text" name="nome" placeholder="Nome">
-    </span>
-    <span>
-      E-mail:
-      <input type="email" name="email" placeholder="E-mail">
-    </span>
-    <span>
-      Mensagem:
-      <textarea name="mensagem" id="mensagem" cols="30" rows="10"></textarea>
-    </span>
-    <input type="submit" name="submit" value="Enviar">
-  </form>
-  </main>
+  <div class="container-main">
+    <h1>Mensagens do Suporte</h1>
+
+    <table class="table table-success table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">E-Mail</th>
+          <th scope="col">Mensagem</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        while ($user_data_suporte = $result_dados_suporte->fetch(PDO::FETCH_ASSOC)) {
+          echo "<tr>";
+          echo "<td>" . $user_data_suporte['id'] . "</td>";
+          echo "<td>" . $user_data_suporte['nome'] . "</td>";
+          echo "<td>" . $user_data_suporte['email'] . "</td>";
+          echo "<td>" . $user_data_suporte['mensagem'] . "</td>";
+          echo "</tr>";
+        }
+        ?>
+      </tbody>
+    </table>
+  </div>
   <footer>
     <section class="container-footer">
       <img class="logo-footer" src="../img/mjp-footer.png" alt="Essa é a logo da MJP" style="height:150px; width:270px">

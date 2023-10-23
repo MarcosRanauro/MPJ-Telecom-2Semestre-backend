@@ -1,6 +1,5 @@
 <?php
 session_start();
-// print_r($_SESSION);
 
 if (!isset($_SESSION['usu_login']) || !isset($_SESSION['usu_senha']) || !isset($_SESSION['tipo_usuario']) || $_SESSION['tipo_usuario'] !== 'master') {
   unset($_SESSION['usu_login']);
@@ -49,7 +48,7 @@ if ($stmt->rowCount() > 0) {
 
 $sql_dadosDB = "SELECT * FROM usuarios ORDER BY usu_nome";
 $result_dadosDB = $pdo->query($sql_dadosDB);
-// print_r($result_dadosDB);
+
 ?>
 
 <!DOCTYPE html>
@@ -147,6 +146,7 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
       Telefone Fixo: <?php echo $logado_telefoneFixo; ?> <br>
       Endereço: <?php echo $logado_endereco; ?> <br>
     </div>
+    <a class="btn btn-primary" href="mensagensSuporte.php" role="button">Mensagens do Suporte</a>
     <div>
       <table class="table table-success table-striped">
         <thead>
