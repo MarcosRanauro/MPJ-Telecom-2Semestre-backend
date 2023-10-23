@@ -157,8 +157,6 @@ if ($stmt && $stmt->rowCount() > 0) {
       </span>
       Editar
     </a>
-    <a href="../index.php">Home</a>
-    <a href="../components/sair.php">Sair</a>
   </div>
   <footer>
     <section class="container-footer">
