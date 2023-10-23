@@ -16,8 +16,12 @@
                 <li><a class="peril-logado" href="../pages/perfilMaster.php">Meu Perfil</a></li>
             <?php } else { ?>
                 <li><a class="peril-logado" href="../pages/perfil.php">Meu Perfil</a></li>
+                
             <?php } ?>
+            <li><a class="peril-logado" href="javascript:history.go(-1)">Voltar</a></li>
+            <li><a class="peril-logado" href="../index.php">Home</a></li>
             <li><a class="peril-logado" href="../components/sair.php">Sair</a></li>
+            
         <?php } else { ?>
             <li><a class="menu-primario" href="#">WhatsApp</a></li>
             <li><a class="menu-primario" href="#">FAQ</a></li>
