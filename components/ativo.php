@@ -10,10 +10,10 @@ if (!empty($_GET['id'])) {
   $stmtSelect->execute();
 
   if ($stmtSelect && $stmtSelect->rowCount() > 0) {
-    $sqlDelete = "DELETE FROM usuarios WHERE id = :id";
-    $stmtDelete = $pdo->prepare($sqlDelete);
-    $stmtDelete->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmtDelete->execute();
+    $sqlUpdate = "UPDATE usuarios SET usu_estado = 1 WHERE id = :id";
+    $stmtUpdate = $pdo->prepare($sqlUpdate);
+    $stmtUpdate->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmtUpdate->execute();
   }
 }
 header('Location: ../pages/perfilMaster.php');

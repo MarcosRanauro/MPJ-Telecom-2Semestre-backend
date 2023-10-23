@@ -30,6 +30,7 @@ if (isset($_POST['submit']) && !empty($_POST['login']) && !empty($_POST['pass'])
   if ($stmt && $stmt->rowCount() > 0) {
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $logado_tipoUsuario = $row['tipo_usuario'];
+    $logado_estadoUsuario = $row['usu_estado'];
   }
 
   if ($stmt->rowCount() < 1) {
@@ -41,10 +42,13 @@ if (isset($_POST['submit']) && !empty($_POST['login']) && !empty($_POST['pass'])
     $_SESSION['usu_senha'] = $pass;
     $_SESSION['role'] = $row['tipo_usuario'];
     $_SESSION['tipo_usuario'] = $logado_tipoUsuario;
-    if ($logado_tipoUsuario == 'master') {
+    $_SESSION['usu_estado'] = $logado_estadoUsuario;
+    if ($logado_tipoUsuario == 'master' && $logado_estadoUsuario == 1) {
       header('Location: ../index.php');
-    } elseif ($logado_tipoUsuario == 'comum') {
+    } else if ($logado_tipoUsuario == 'comum' && $logado_estadoUsuario == 1) {
       header('Location: 2ffa.php');
+    } else {
+      header('Location: inativo.php');
     }
   }
 } else {
