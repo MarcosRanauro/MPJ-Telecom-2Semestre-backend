@@ -19,9 +19,6 @@
         <li><a class="menu-primario" href="#">Institucional</a></li>
       </ul>
       <ul class="navbar-right">
-        <?php if ($_SESSION['tipo_usuario']) { ?>
-          <?php require_once('../components/header.php'); ?>
-        <?php } else { ?>
           <li><a class="menu-primario" href="#">WhatsApp</a></li>
           <li><a class="menu-primario" href="#">FAQ</a></li>
           <li><a class="menu-primario" href="#">Carreiras</a></li>
@@ -31,7 +28,6 @@
             <i class="fa-solid fa-user" style="color: #ffffff;"></i>
             <button class="botao-login-b">Área do Cliente</button>
           </a>
-        <?php } ?>
       </ul>
     </section>
 
