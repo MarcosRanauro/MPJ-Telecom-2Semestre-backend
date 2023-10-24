@@ -28,6 +28,7 @@ $stmt->execute();
 if ($stmt->rowCount() > 0) {
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
   $logado_nome = $row['usu_nome'];
+  $logado_email = $row['usu_email'];
   $logado_dataNasc = $row['usu_dataNasc'];
   $logado_sexo = $row['usu_sexo'];
   $logado_nomeMaterno = $row['usu_nomeMaterno'];
@@ -37,6 +38,7 @@ if ($stmt->rowCount() > 0) {
   $logado_endereco = $row['usu_endereco'];
 } else {
   $logado_nome = "Não encontrado";
+  $logado_email = "Não encontrado";
   $logado_dataNasc = "Não encontrado";
   $logado_sexo = "Não encontrado";
   $logado_nomeMaterno = "Não encontrado";
@@ -48,6 +50,8 @@ if ($stmt->rowCount() > 0) {
 
 $sql_dadosDB = "SELECT * FROM usuarios ORDER BY usu_nome";
 $result_dadosDB = $pdo->query($sql_dadosDB);
+
+include_once('../components/formatDate.php');
 
 ?>
 
@@ -74,8 +78,9 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
     <div class="container-infos">
       Bem vindo ao perfil de Usúario Master, <?php echo $logado_login; ?> <br>
       Nome: <?php echo $logado_nome; ?><br>
+      E-Mail: <?php echo $logado_email; ?><br>
       Sexo: <?php echo $logado_sexo; ?><br>
-      Data de Nascimento: <?php echo $logado_dataNasc; ?> <br>
+      Data de Nascimento: <?php echo formatData($logado_dataNasc); ?> <br>
       Nome da Mãe: <?php echo $logado_nomeMaterno; ?> <br>
       CPF: <?php echo $logado_cpf; ?> <br>
       Celular: <?php echo $logado_celular; ?> <br>
@@ -87,6 +92,7 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
       <h3>Pesquisa de Usuarios</h3>
       <select id="criteria" class="form-select form-select-sm" aria-label="Small select example">
         <option selected>Escolha o Parâmetro de Pesquisa</option>
+        <option value="email">E-Mail</option>
         <option value="nome">Nome</option>
         <option value="id">ID</option>
         <option value="cpf">CPF</option>
@@ -102,6 +108,7 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
           <tr>
             <th scope="col">id</th>
             <th scope="col">Nome</th>
+            <th scope="col">E-Mail</th>
             <th scope="col">Data de Nascimento</th>
             <th scope="col">Genero</th>
             <th scope="col">Nome Materno</th>
@@ -123,6 +130,7 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
             echo "<tr>";
             echo "<td data-criteria='id'>" . $user_data['id'] . "</td>";
             echo "<td data-criteria='nome'>" . $user_data['usu_nome'] . "</td>";
+            echo "<td data-criteria='email'>" . $user_data['usu_email'] . "</td>";
             echo "<td>" . $user_data['usu_dataNasc'] . "</td>";
             echo "<td>" . $user_data['usu_sexo'] . "</td>";
             echo "<td>" . $user_data['usu_nomeMaterno'] . "</td>";

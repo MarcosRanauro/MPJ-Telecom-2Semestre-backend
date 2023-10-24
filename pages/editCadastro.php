@@ -13,6 +13,7 @@ if (!empty($_GET['id'])) {
     if ($stmt->rowCount() > 0) {
         $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
         $nome = $user_data['usu_nome'];
+        $email = $user_data['usu_email'];
         $dataNascimento = $user_data['usu_dataNasc'];
         $sexo = $user_data['usu_sexo'];
         $nomeMaterno = $user_data['usu_nomeMaterno'];
@@ -58,8 +59,12 @@ if (!empty($_GET['id'])) {
             <form action="../components/saveEdit.php" method="POST" class="container" id="form">
                 <div class="form-control form-control-lg input-container">
                     <h1>Editar Cadastro</h1>
+
                     <label for="nome" class="col-form-label">Nome</label>
                     <input class="form-control" type="text" name="nome" id="nome" minlength="15" maxlength="60" require value="<?php echo $nome ?>">
+
+                    <label for="email" class="col-form-label">E-mail</label>
+                    <input class="form-control" type="email" name="email" id="email" placeholder="E-mail" required value="<?php echo $email ?>">
 
                     <label for="dataNascimento" class="col-form-label">Data de Nascimento:</label>
                     <input class="form-control" type="date" id="dataNascimento" name="dataNascimento" value="<?php echo $dataNascimento ?>">

@@ -39,6 +39,7 @@ if ($stmt && $stmt->rowCount() > 0) {
 
   $id = $user_data_comum['id'];
   $logado_nome = $user_data_comum['usu_nome'];
+  $logado_email = $user_data_comum['usu_email'];
   $logado_dataNasc = $user_data_comum['usu_dataNasc'];
   $logado_sexo = $user_data_comum['usu_sexo'];
   $logado_nomeMaterno = $user_data_comum['usu_nomeMaterno'];
@@ -48,6 +49,7 @@ if ($stmt && $stmt->rowCount() > 0) {
   $logado_endereco = $user_data_comum['usu_endereco'];
 } else {
   $logado_nome = "Não encontrado";
+  $logado_email = "Não encontrado";
   $logado_dataNasc = "Não encontrado";
   $logado_sexo = "Não encontrado";
   $logado_nomeMaterno = "Não encontrado";
@@ -56,6 +58,8 @@ if ($stmt && $stmt->rowCount() > 0) {
   $logado_telefoneFixo = "Não encontrado";
   $logado_endereco = "Não encontrado";
 }
+
+include_once('../components/formatDate.php');
 ?>
 
 <!DOCTYPE html>
@@ -79,8 +83,9 @@ if ($stmt && $stmt->rowCount() > 0) {
   <div class="container-perfil">
     <h1>Bem vindo ao perfil de Usúario, <?php echo $logado_login; ?></h1>
     <p>Nome: <?php echo $logado_nome; ?></p>
+    <p>Email: <?php echo $logado_email; ?></p>
     <p>Sexo: <?php echo $logado_sexo; ?></p>
-    <p>Data de Nascimento: <?php echo $logado_dataNasc; ?></p>
+    <p>Data de Nascimento: <?php echo formatData($logado_dataNasc); ?></p>
     <p>Nome da Mãe: <?php echo $logado_nomeMaterno; ?></p>
     <p>CPF: <?php echo $logado_cpf; ?></p>
     <p>Celular: <?php echo $logado_celular; ?></p>

@@ -3,6 +3,7 @@ if (isset($_POST['submit'])) {
     include_once('../components/config.php');
 
     $nome = $_POST['nome'];
+    $email = $_POST['email'];
     $dataNascimento = $_POST['dataNascimento'];
     $sexo = $_POST['sexo'];
     $nomeMaterno = $_POST['nomeMaterno'];
@@ -14,39 +15,30 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
 
-    // Inicialize um array para armazenar mensagens de erro
     $errors = array();
 
-    // Verifique o campo "login-name" para ter exatamente 6 letras
     if (strlen($loginName) !== 6) {
         $errors[] = "O campo de Login deve ter exatamente 6 letras.";
     }
 
-    // Verifique as senhas para terem exatamente 8 letras
     if (strlen($password) !== 8 || strlen($confirmPassword) !== 8) {
         $errors[] = "A senha deve ter exatamente 8 letras.";
     }
 
-    // Verifique se as senhas são iguais
     if ($password !== $confirmPassword) {
         $errors[] = "As senhas não coincidem. Por favor, verifique.";
     }
 
-    // Mais validações podem ser adicionadas aqui...
-
-    // Após as verificações, você pode verificar se há erros
     if (count($errors) > 0) {
-        // Codifique as mensagens de erro em um formato JSON para passar como parâmetro
         $errorMessages = json_encode($errors);
 
-        // Redirecione o usuário para a página de erro com as mensagens de erro
         header("Location: ../components/erro.php?errors=$errorMessages");
-        exit; // Encerre o script
+        exit;
     } else {
-        // Não houve erros, prossiga com a inserção no banco de dados usando PDO
-        $sql = "INSERT INTO usuarios(usu_nome, usu_dataNasc, usu_sexo, usu_nomeMaterno, usu_cpf, usu_celular, usu_telefoneFixo, usu_endereco, usu_login, usu_senha, usu_confirmarSenha) VALUES (:nome, :dataNascimento, :sexo, :nomeMaterno, :cpf, :cellPhone, :phone, :endereco, :loginName, :password, :confirmPassword)";
+        $sql = "INSERT INTO usuarios(usu_nome, usu_email, usu_dataNasc, usu_sexo, usu_nomeMaterno, usu_cpf, usu_celular, usu_telefoneFixo, usu_endereco, usu_login, usu_senha, usu_confirmarSenha) VALUES (:nome, :email, :dataNascimento, :sexo, :nomeMaterno, :cpf, :cellPhone, :phone, :endereco, :loginName, :password, :confirmPassword)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->bindParam(':dataNascimento', $dataNascimento, PDO::PARAM_STR);
         $stmt->bindParam(':sexo', $sexo, PDO::PARAM_STR);
         $stmt->bindParam(':nomeMaterno', $nomeMaterno, PDO::PARAM_STR);
@@ -59,13 +51,11 @@ if (isset($_POST['submit'])) {
         $stmt->bindParam(':confirmPassword', $confirmPassword, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
-            // Redirecione o usuário para uma página de sucesso
             header("Location: Login.php");
-            exit; // Encerre o script
+            exit;
         } else {
-            // Redirecione o usuário para a página de erro
             header("Location: ../components/erro.php");
-            exit; // Encerre o script
+            exit;
         }
     }
 }
@@ -95,6 +85,9 @@ if (isset($_POST['submit'])) {
                     <h1>Crie sua conta</h1>
                     <label for="nome" class="col-form-label">Nome</label>
                     <input class="form-control" type="text" name="nome" id="nome" minlength="15" maxlength="60" require>
+
+                    <label for="email" class="col-form-label">E-mail</label>
+                    <input class="form-control" type="email" name="email" id="email" placeholder="E-mail" required>
 
                     <label for="dataNascimento" class="col-form-label">Data de Nascimento:</label>
                     <input class="form-control" type="date" id="dataNascimento" name="dataNascimento">

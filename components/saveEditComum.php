@@ -4,6 +4,7 @@
   if(isset($_POST['update'])) {
     $id = $_POST['id'];
     $nome = $_POST['nome'];
+    $email = $_POST['email'];
     $dataNasc = $_POST['dataNascimento'];
     $sexo = $_POST['sexo'];
     $nomeMaterno = $_POST['nomeMaterno'];
@@ -15,7 +16,7 @@
     $senha = $_POST['password'];
     $confirmarSenha = $_POST['confirm-password'];
 
-    $sqlUpdate = "UPDATE usuarios SET usu_nome = '$nome', usu_dataNasc = '$dataNasc', usu_sexo = '$sexo', usu_nomeMaterno = '$nomeMaterno', usu_cpf = '$cpf', usu_celular = '$celular', usu_telefoneFixo = '$telefoneFixo', usu_endereco = '$endereco', usu_login = '$nomeLogin', usu_senha = '$senha', usu_confirmarSenha = '$confirmarSenha' WHERE id = '$id'";
+    $sqlUpdate = "UPDATE usuarios SET usu_nome = '$nome', usu_email = '$email', usu_dataNasc = '$dataNasc', usu_sexo = '$sexo', usu_nomeMaterno = '$nomeMaterno', usu_cpf = '$cpf', usu_celular = '$celular', usu_telefoneFixo = '$telefoneFixo', usu_endereco = '$endereco', usu_login = '$nomeLogin', usu_senha = '$senha', usu_confirmarSenha = '$confirmarSenha' WHERE id = '$id'";
 
     $result = $pdo->query($sqlUpdate);
   }
