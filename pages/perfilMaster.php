@@ -59,6 +59,7 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <link href="../styles/perfilMaster.css" rel="stylesheet">
   <title>Perfil Master</title>
 </head>
 
@@ -68,9 +69,9 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
   <?php } else { ?>
     <?php require_once('../components/headerDefault.php'); ?>
   <?php } ?>
-  <div class="m-1">
-    <h1>Perfil Master</h1>
-    <div>
+  <div class="m-1 container-master">
+    <h1>Perfil do Usuário</h1>
+    <div class="container-infos">
       Bem vindo ao perfil de Usúario Master, <?php echo $logado_login; ?> <br>
       Nome: <?php echo $logado_nome; ?><br>
       Sexo: <?php echo $logado_sexo; ?><br>
@@ -80,13 +81,26 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
       Celular: <?php echo $logado_celular; ?> <br>
       Telefone Fixo: <?php echo $logado_telefoneFixo; ?> <br>
       Endereço: <?php echo $logado_endereco; ?> <br>
+      <a class="btn btn-primary" href="mensagensSuporte.php" role="button">Mensagens do Suporte</a>
     </div>
-    <a class="btn btn-primary" href="mensagensSuporte.php" role="button">Mensagens do Suporte</a>
+    <div class="container-pesquisa">
+      <h3>Pesquisa de Usuarios</h3>
+      <select id="criteria" class="form-select form-select-sm" aria-label="Small select example">
+        <option selected>Escolha o Parâmetro de Pesquisa</option>
+        <option value="nome">Nome</option>
+        <option value="id">ID</option>
+        <option value="cpf">CPF</option>
+      </select>
+      <input type="search" class="form-control rounded" placeholder="Pesquisar" id="pesquisar" />
+      <button type="button" class="btn btn-outline-primary" id="btn-pesquisar"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+        </svg></button>
+    </div>
     <div>
       <table class="table table-success table-striped">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">id</th>
             <th scope="col">Nome</th>
             <th scope="col">Data de Nascimento</th>
             <th scope="col">Genero</th>
@@ -107,12 +121,12 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
           <?php
           while ($user_data = $result_dadosDB->fetch(PDO::FETCH_ASSOC)) {
             echo "<tr>";
-            echo "<td>" . $user_data['id'] . "</td>";
-            echo "<td>" . $user_data['usu_nome'] . "</td>";
+            echo "<td data-criteria='id'>" . $user_data['id'] . "</td>";
+            echo "<td data-criteria='nome'>" . $user_data['usu_nome'] . "</td>";
             echo "<td>" . $user_data['usu_dataNasc'] . "</td>";
             echo "<td>" . $user_data['usu_sexo'] . "</td>";
             echo "<td>" . $user_data['usu_nomeMaterno'] . "</td>";
-            echo "<td>" . $user_data['usu_cpf'] . "</td>";
+            echo "<td data-criteria='cpf'>" . $user_data['usu_cpf'] . "</td>";
             echo "<td>" . $user_data['usu_celular'] . "</td>";
             echo "<td>" . $user_data['usu_telefoneFixo'] . "</td>";
             echo "<td>" . $user_data['usu_endereco'] . "</td>";
@@ -145,5 +159,40 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
   </div>
   <?php require_once('../components/footer.php'); ?>
 </body>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const selectCriteria = document.getElementById("criteria");
+    const inputPesquisar = document.getElementById("pesquisar");
+    const btnPesquisar = document.getElementById("btn-pesquisar");
+    const tabelaUsuarios = document.querySelector(".table tbody");
+
+    btnPesquisar.addEventListener("click", function() {
+      realizarPesquisa();
+    });
+
+    inputPesquisar.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        realizarPesquisa();
+      }
+    });
+
+    function realizarPesquisa() {
+      const termoPesquisa = inputPesquisar.value.toLowerCase();
+      const criterio = selectCriteria.value;
+      const linhas = tabelaUsuarios.querySelectorAll("tr");
+
+      linhas.forEach(function(linha) {
+        const textoCelula = linha.querySelector(`td[data-criteria="${criterio}"]`).textContent.toLowerCase();
+
+        if (textoCelula.includes(termoPesquisa)) {
+          linha.style.display = "";
+        } else {
+          linha.style.display = "none";
+        }
+      });
+    }
+  });
+</script>
 
 </html>
