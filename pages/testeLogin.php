@@ -48,6 +48,11 @@ if (isset($_POST['submit']) && !empty($_POST['login']) && !empty($_POST['pass'])
     } else if ($logado_tipoUsuario == 'comum' && $logado_estadoUsuario == 1) {
       header('Location: 2ffa.php');
     } else {
+      unset($_SESSION['usu_login']);
+      unset($_SESSION['usu_senha']);
+      unset($_SESSION['role']);
+      unset($_SESSION['tipo_usuario']);
+      unset($_SESSION['usu_estado']);
       header('Location: inativo.php');
     }
   }

@@ -27,10 +27,11 @@
 	<link rel="stylesheet" type="text/css" href="../css/util.css">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 	<!--===============================================================================================-->
+	<link rel="stylesheet" href="../styles/2ffa.css">
 </head>
 
 <body>
-
+	<?php include_once('../components/headerDefault.php'); ?>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -83,7 +84,7 @@
 			</div>
 		</div>
 	</div>
-
+	<?php include_once('../components/footer.php'); ?>
 
 	<div id="dropDownSelect1"></div>
 
