@@ -16,16 +16,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
             $stmt->bindParam(":id", $id, PDO::PARAM_INT);
             $stmt->execute();
             if($tipo_usuario == 'master') {
-                header('Location: ../pages/perfilMaster.php');
+              header('Location: ../pages/perfilMaster.php');
             } else {
-                header('Location: ../pages/perfil.php');
+              header('Location: ../pages/perfil.php');
             }
+            exit();
         }
     }
 }
-if($tipo_usuario == 'master') {
-    header('Location: ../pages/perfilMaster.php');
-} else {
-    header('Location: ../pages/perfil.php');
-}
-?>
