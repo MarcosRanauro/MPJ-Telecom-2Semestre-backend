@@ -7,9 +7,9 @@ if ($_FILES["profile_image"]["error"] == 0) {
   $tipo_usuario = $_POST['tipo_usuario'];
   $temp_name = $_FILES["profile_image"]["tmp_name"];
 
-  $upload_dir = "../Fotos/";
+  $upload_dir = "/opt/lampp/htdocs/MPJ-Telecom-2Semestre-backend/Fotos";
 
-  $image_name = "imagem-de-perfil-ID:" . $id . ".jpg";
+  $image_name = "imagem-de-perfil";
 
   $image_path = $upload_dir . $image_name;
 
