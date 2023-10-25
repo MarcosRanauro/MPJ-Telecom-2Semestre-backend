@@ -2,6 +2,8 @@
 session_start();
 include_once('./config.php');
 
+$tipo_usuario = isset($_POST['tipo_usuario']) ? $_POST['tipo_usuario'] : '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
     $id = $_POST['id'];
     $tipo_usuario = $_POST['tipo_usuario'];
@@ -23,19 +25,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
 
             if($tipo_usuario == 'master') {
                 header('Location: ../pages/perfilMaster.php');
-                exit();
             } else {
                 header('Location: ../pages/perfil.php');
-                exit();
             }
         }
     }
 }
 if($tipo_usuario == 'master') {
     header('Location: ../pages/perfilMaster.php');
-    exit();
 } else {
     header('Location: ../pages/perfil.php');
-    exit();
 }
 ?>
