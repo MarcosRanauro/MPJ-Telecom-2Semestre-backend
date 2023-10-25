@@ -9,7 +9,7 @@ if ($_FILES["profile_image"]["error"] == 0) {
 
   $upload_dir = "../Fotos/";
 
-  $image_name = "imagem-de-perfil";
+  $image_name = "imagem-de-perfil-ID:" . $id . ".jpg";
 
   $image_path = $upload_dir . $image_name;
 
@@ -26,21 +26,21 @@ if ($_FILES["profile_image"]["error"] == 0) {
       header('Location: ../pages/perfilMaster.php');
     } else {
       echo "A imagem foi carregada com sucesso e o caminho foi atualizado no banco de dados.";
-      //header('Location: ../pages/perfil.php');
+      header('Location: ../pages/perfil.php');
     }
   } else {
     if ($tipo_usuario == 'master') {
-      //echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
+      echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
     } else {
       echo "Falha ao carregar a imagem.";
-      //echo '<script>window.location.href = "../pages/perfil.php";</script>';
+      echo '<script>window.location.href = "../pages/perfil.php";</script>';
     }
   }
 } else {
   if ($tipo_usuario == 'master') {
-    //echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
+    echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
   } else {
     echo "Erro ao carregar a imagem: " . $_FILES["profile_image"]["error"];
-    //echo '<script>window.location.href = "../pages/perfil.php";</script>';
+    echo '<script>window.location.href = "../pages/perfil.php";</script>';
   }
 }
