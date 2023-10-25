@@ -28,7 +28,6 @@ $stmt->execute();
 if ($stmt->rowCount() > 0) {
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
   $id = $row['id'];
-  print_r($id);
   $logado_nome = $row['usu_nome'];
   $logado_email = $row['usu_email'];
   $logado_dataNasc = $row['usu_dataNasc'];
@@ -39,7 +38,6 @@ if ($stmt->rowCount() > 0) {
   $logado_telefoneFixo = $row['usu_telefoneFixo'];
   $logado_endereco = $row['usu_endereco'];
   $logado_tipo_usuario = $row['tipo_usuario'];
-  $image_path = $row['profile_image_path'];
 } else {
   $logado_nome = "Não encontrado";
   $logado_email = "Não encontrado";
