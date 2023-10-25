@@ -28,15 +28,15 @@ if ($_FILES["profile_image"]["error"] == 0) {
       header('Location: ../pages/perfil.php');
     }
   } else {
-    if($tipo_usuario == 'master') {
+    if ($tipo_usuario == 'master') {
       header('Location: ../pages/perfilMaster.php');
     } else {
       echo "Falha ao carregar a imagem.";
-    header('Location: ../pages/perfil.php');
+      header('Location: ../pages/perfil.php');
     }
   }
 } else {
-  if($tipo_usuario == 'master') {
+  if ($tipo_usuario == 'master') {
     header('Location: ../pages/perfilMaster.php');
   } else {
     echo "Erro ao carregar a imagem: " . $_FILES["profile_image"]["error"];
