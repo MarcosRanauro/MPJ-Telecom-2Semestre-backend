@@ -17,7 +17,7 @@
   <?php } else { ?>
     <?php require_once('../components/headerDefault.php'); ?>
   <?php } ?>
-  <main>
+  <main class="container-2ffa">
     <h1>Autenticação de 2 fatores</h1>
     <form action="teste2ffa.php" method="POST">
       <label for="cpf">Digite o seu cpf:</label>
