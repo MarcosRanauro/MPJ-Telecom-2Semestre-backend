@@ -12,11 +12,7 @@
 </head>
 
 <body>
-  <?php if ($_SESSION['tipo_usuario']) { ?>
-    <?php require_once('../components/header.php'); ?>
-  <?php } else { ?>
-    <?php require_once('../components/headerDefault.php'); ?>
-  <?php } ?>
+  <?php require_once('../components/headerDefault.php'); ?>
   <main class="container-2ffa">
     <h1>Autenticação de 2 fatores</h1>
     <form action="teste2ffa.php" method="POST">
