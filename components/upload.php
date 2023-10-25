@@ -29,17 +29,17 @@ if ($_FILES["profile_image"]["error"] == 0) {
     }
   } else {
     if ($tipo_usuario == 'master') {
-      header('Location: ../pages/perfilMaster.php');
+      echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
     } else {
       echo "Falha ao carregar a imagem.";
-      header('Location: ../pages/perfil.php');
+      echo '<script>window.location.href = "../pages/perfil.php";</script>';
     }
   }
 } else {
   if ($tipo_usuario == 'master') {
-    header('Location: ../pages/perfilMaster.php');
+    echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
   } else {
     echo "Erro ao carregar a imagem: " . $_FILES["profile_image"]["error"];
-    header('Location: ../pages/perfil.php');
+    echo '<script>window.location.href = "../pages/perfil.php";</script>';
   }
 }
