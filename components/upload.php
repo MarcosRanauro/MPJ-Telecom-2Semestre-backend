@@ -4,6 +4,7 @@ include_once('./config.php');
 
 if ($_FILES["profile_image"]["error"] == 0) {
   $id = $_POST['id'];
+  $tipo_usuario = $_POST['tipo_usuario'];
   $temp_name = $_FILES["profile_image"]["tmp_name"];
 
   $upload_dir = "../Fotos/";
@@ -20,13 +21,25 @@ if ($_FILES["profile_image"]["error"] == 0) {
     $stmt->bindParam(":id", $userID, PDO::PARAM_INT);
     $stmt->execute();
 
-    echo "A imagem foi carregada com sucesso e o caminho foi atualizado no banco de dados.";
-    header('Location: ../pages/perfil.php');
+    if ($tipo_usuario == 'master') {
+      header('Location: ../pages/perfilMaster.php');
+    } else {
+      echo "A imagem foi carregada com sucesso e o caminho foi atualizado no banco de dados.";
+      header('Location: ../pages/perfil.php');
+    }
   } else {
-    echo "Falha ao carregar a imagem.";
+    if($tipo_usuario == 'master') {
+      header('Location: ../pages/perfilMaster.php');
+    } else {
+      echo "Falha ao carregar a imagem.";
     header('Location: ../pages/perfil.php');
+    }
   }
 } else {
-  echo "Erro ao carregar a imagem: " . $_FILES["profile_image"]["error"];
-  header('Location: ../pages/perfil.php');
+  if($tipo_usuario == 'master') {
+    header('Location: ../pages/perfilMaster.php');
+  } else {
+    echo "Erro ao carregar a imagem: " . $_FILES["profile_image"]["error"];
+    header('Location: ../pages/perfil.php');
+  }
 }

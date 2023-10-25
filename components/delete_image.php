@@ -4,6 +4,7 @@ include_once('./config.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
     $id = $_POST['id'];
+    $tipo_usuario = $_POST['tipo_usuario'];
 
     $stmt = $pdo->prepare("SELECT profile_image_path FROM usuarios WHERE id = :id");
     $stmt->bindParam(":id", $id, PDO::PARAM_INT);
@@ -20,11 +21,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
             $stmt->bindParam(":id", $id, PDO::PARAM_INT);
             $stmt->execute();
 
-            header('Location: ../pages/perfil.php');
-            exit();
+            if($tipo_usuario == 'master') {
+                header('Location: ../pages/perfilMaster.php');
+                exit();
+            } else {
+                header('Location: ../pages/perfil.php');
+                exit();
+            }
         }
     }
 }
-header('Location: ../pages/perfil.php');
-exit();
+if($tipo_usuario == 'master') {
+    header('Location: ../pages/perfilMaster.php');
+    exit();
+} else {
+    header('Location: ../pages/perfil.php');
+    exit();
+}
 ?>

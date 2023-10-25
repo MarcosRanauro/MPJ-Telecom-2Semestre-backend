@@ -27,6 +27,7 @@ $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
+  $id = $row['id'];
   $logado_nome = $row['usu_nome'];
   $logado_email = $row['usu_email'];
   $logado_dataNasc = $row['usu_dataNasc'];
@@ -36,6 +37,8 @@ if ($stmt->rowCount() > 0) {
   $logado_celular = $row['usu_celular'];
   $logado_telefoneFixo = $row['usu_telefoneFixo'];
   $logado_endereco = $row['usu_endereco'];
+  $logado_tipo_usuario = $row['tipo_usuario'];
+  $image_path = $row['profile_image_path'];
 } else {
   $logado_nome = "Não encontrado";
   $logado_email = "Não encontrado";
@@ -46,6 +49,7 @@ if ($stmt->rowCount() > 0) {
   $logado_celular = "Não encontrado";
   $logado_telefoneFixo = "Não encontrado";
   $logado_endereco = "Não encontrado";
+  $logado_tipo_usuario = "Não encontrado";
 }
 
 $sql_dadosDB = "SELECT * FROM usuarios ORDER BY usu_nome";
@@ -74,19 +78,38 @@ include_once('../components/formatDate.php');
     <?php require_once('../components/headerDefault.php'); ?>
   <?php } ?>
   <div class="m-1 container-master">
-    <h1>Perfil do Usuário</h1>
-    <div class="container-infos">
-      Bem vindo ao perfil de Usúario Master, <?php echo $logado_login; ?> <br>
-      Nome: <?php echo $logado_nome; ?><br>
-      E-Mail: <?php echo $logado_email; ?><br>
-      Sexo: <?php echo $logado_sexo; ?><br>
-      Data de Nascimento: <?php echo formatData($logado_dataNasc); ?> <br>
-      Nome da Mãe: <?php echo $logado_nomeMaterno; ?> <br>
-      CPF: <?php echo $logado_cpf; ?> <br>
-      Celular: <?php echo $logado_celular; ?> <br>
-      Telefone Fixo: <?php echo $logado_telefoneFixo; ?> <br>
-      Endereço: <?php echo $logado_endereco; ?> <br>
-      <a class="btn btn-primary" href="mensagensSuporte.php" role="button">Mensagens do Suporte</a>
+    <div class="container-perfil">
+      <div class="container-imagem">
+        <form id="upload-form" action="../components/upload.php" method="POST" enctype="multipart/form-data">
+          <img src="<?php echo $image_path ?>">
+          <input type="file" name="profile_image" accept="image/*">
+          <input type="hidden" name="id" value="<?php echo $id; ?>">
+          <input type="hidden" name="tipo_usuario" value="<?php echo $logado_tipo_usuario ?>">
+          <input type="submit" value="Carregar Foto">
+        </form>
+        <div id="alert" style="display: none;"></div>
+        <form id="delete-form" action="../components/delete_image.php" method="POST">
+          <input type="hidden" name="id" value="<?php echo $id; ?>">
+          <input type="hidden" name="tipo_usuario" value="<?php echo $logado_tipo_usuario ?>">
+          <input type="submit" value="Excluir Foto" name="delete" onclick="return confirm('Tem certeza de que deseja excluir sua foto de perfil?');">
+        </form>
+
+      </div>
+
+      <div class="container-infos">
+        <h1>Perfil do Usuário</h1>
+        Bem vindo ao perfil de Usúario Master, <?php echo $logado_login; ?> <br>
+        Nome: <?php echo $logado_nome; ?><br>
+        E-Mail: <?php echo $logado_email; ?><br>
+        Sexo: <?php echo $logado_sexo; ?><br>
+        Data de Nascimento: <?php echo formatData($logado_dataNasc); ?> <br>
+        Nome da Mãe: <?php echo $logado_nomeMaterno; ?> <br>
+        CPF: <?php echo $logado_cpf; ?> <br>
+        Celular: <?php echo $logado_celular; ?> <br>
+        Telefone Fixo: <?php echo $logado_telefoneFixo; ?> <br>
+        Endereço: <?php echo $logado_endereco; ?> <br>
+        <a class="btn btn-primary" href="mensagensSuporte.php" role="button">Mensagens do Suporte</a>
+      </div>
     </div>
     <div class="container-pesquisa">
       <h3>Pesquisa de Usuarios</h3>

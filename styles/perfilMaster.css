@@ -1,15 +1,73 @@
 .container-master {
     display: flex;
     flex-direction: column;
+    gap: 30px;
+}
+
+.container-perfil {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .container-perfil form {
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  .container-imagem form{
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    text-align: center;
+    width: 900px;
     gap: 10px;
-}
+  }
+  
+  .container-imagem img {
+    height: 400px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  .container-imagem label {
+    background-color: #007BFF; 
+    color: #fff; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  
+  .container-imagem label:hover {
+    background-color: #0056b3;
+  }
+  
+  .container-imagem input {
+    background-color: #007BFF; 
+    color: #fff; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  
+  .container-imagem input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
 
 .container-infos {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     width: 50%;
@@ -22,7 +80,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 60%;
+    margin-left: 20%;
     gap: 10px;
 }
 
