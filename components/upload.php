@@ -19,7 +19,7 @@ if ($_FILES["profile_image"]["error"] == 0) {
     if ($tipo_usuario == 'master') {
       echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
     } else {
-      echo '<script>window.location.href = "../pages/perfil.php";</script>';
+      //echo '<script>window.location.href = "../pages/perfil.php";</script>';
     }
   } else {
     if ($tipo_usuario == 'master') {
@@ -27,7 +27,7 @@ if ($_FILES["profile_image"]["error"] == 0) {
       echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
     } else {
       echo "A imagem não foi atualizada!";
-      echo '<script>window.location.href = "../pages/perfil.php";</script>';
+      //echo '<script>window.location.href = "../pages/perfil.php";</script>';
     }
   }
 }

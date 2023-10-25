@@ -46,7 +46,6 @@ if ($stmt && $stmt->rowCount() > 0) {
   $logado_celular = $user_data_comum['usu_celular'];
   $logado_telefoneFixo = $user_data_comum['usu_telefoneFixo'];
   $logado_endereco = $user_data_comum['usu_endereco'];
-  $image_path = $user_data_comum['profile_image_path'];
 } else {
   $logado_nome = "Não encontrado";
   $logado_email = "Não encontrado";
