@@ -23,9 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
             if ($stmt->rowCount() > 0) {
                 // A atualização do banco de dados foi bem-sucedida
                 if ($tipo_usuario == 'master') {
-                    //echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
+                    echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
                 } else {
-                    //echo '<script>window.location.href = "../pages/perfil.php";</script>';
+                    echo '<script>window.location.href = "../pages/perfil.php";</script>';
                 }
             } else {
                 // Ocorreu um erro ao atualizar o banco de dados

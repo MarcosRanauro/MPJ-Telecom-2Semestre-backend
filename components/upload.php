@@ -17,19 +17,17 @@ if ($_FILES["profile_image"]["error"] == 0) {
 
   if($stmt->rowCount() > 0) {
     if ($tipo_usuario == 'master') {
-      echo "A imagem foi atualizada com sucesso!";
-      //echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
+      echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
     } else {
-      echo "A imagem foi atualizada com sucesso!";
-      //echo '<script>window.location.href = "../pages/perfil.php";</script>';
+      echo '<script>window.location.href = "../pages/perfil.php";</script>';
     }
   } else {
     if ($tipo_usuario == 'master') {
       echo "A imagem não foi atualizada!";
-      //echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
+      echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
     } else {
       echo "A imagem não foi atualizada!";
-      //echo '<script>window.location.href = "../pages/perfil.php";</script>';
+      echo '<script>window.location.href = "../pages/perfil.php";</script>';
     }
   }
 }
