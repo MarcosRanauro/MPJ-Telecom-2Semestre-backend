@@ -21,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
                     echo '<script>window.location.href = "../pages/perfil.php";</script>';
                 }
             } else {
-                echo '<script>alert("Erro ao deletar imagem");</script>';
                 if ($tipo_usuario == 'master') {
                     echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
                 } else {
