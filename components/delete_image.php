@@ -16,9 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
             $stmt->bindParam(":id", $id, PDO::PARAM_INT);
             $stmt->execute();
             if($tipo_usuario == 'master') {
-              header('Location: ../pages/perfilMaster.php');
+              echo '<script>window.location.href = "../pages/perfilMaster.php";</script>';
             } else {
-              header('Location: ../pages/perfil.php');
+              echo '<script>window.location.href = "../pages/perfil.php";</script>';
             }
             exit();
         }
