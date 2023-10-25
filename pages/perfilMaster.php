@@ -28,6 +28,7 @@ $stmt->execute();
 if ($stmt->rowCount() > 0) {
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
   $id = $row['id'];
+  print_r($id);
   $logado_nome = $row['usu_nome'];
   $logado_email = $row['usu_email'];
   $logado_dataNasc = $row['usu_dataNasc'];
@@ -56,6 +57,19 @@ $sql_dadosDB = "SELECT * FROM usuarios ORDER BY usu_nome";
 $result_dadosDB = $pdo->query($sql_dadosDB);
 
 include_once('../components/formatDate.php');
+
+$sqlImage = "SELECT profile_image FROM usuarios WHERE id = :id";
+$stmt2 = $pdo->prepare($sqlImage);
+$stmt2->bindParam(':id', $id, PDO::PARAM_INT);
+$stmt2->execute();
+$row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+if ($row2) {
+  $image_data = $row2['profile_image'];
+  if($image_data !== null) {
+    $image_path = 'data:image/jpeg;base64,' . base64_encode($image_data);
+  }
+}
 
 ?>
 

@@ -60,6 +60,19 @@ if ($stmt && $stmt->rowCount() > 0) {
 }
 include_once('../components/formatDate.php');
 
+$sqlImage = "SELECT profile_image FROM usuarios WHERE id = :id";
+$stmt2 = $pdo->prepare($sqlImage);
+$stmt2->bindParam(':id', $id, PDO::PARAM_INT);
+$stmt2->execute();
+$row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+if ($row2) {
+  $image_data = $row2['profile_image'];
+  if($image_data !== null) {
+    $image_path = 'data:image/jpeg;base64,' . base64_encode($image_data);
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
