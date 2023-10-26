@@ -4,6 +4,7 @@ include_once('./config.php');
 
 if ($_FILES["profile_image"]["error"] == 0) {
   $id = $_POST['id'];
+  $tipo_usuario = $_POST['tipo_usuario'];
   $temp_name = $_FILES["profile_image"]["tmp_name"];
 
   $image_data = file_get_contents($temp_name);

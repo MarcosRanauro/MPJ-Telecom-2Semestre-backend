@@ -46,6 +46,7 @@ if ($stmt && $stmt->rowCount() > 0) {
   $logado_celular = $user_data_comum['usu_celular'];
   $logado_telefoneFixo = $user_data_comum['usu_telefoneFixo'];
   $logado_endereco = $user_data_comum['usu_endereco'];
+  $logado_tipoUsuario = $user_data_comum['tipo_usuario'];
 } else {
   $logado_nome = "Não encontrado";
   $logado_email = "Não encontrado";
@@ -57,6 +58,7 @@ if ($stmt && $stmt->rowCount() > 0) {
   $logado_telefoneFixo = "Não encontrado";
   $logado_endereco = "Não encontrado";
 }
+
 include_once('../components/formatDate.php');
 
 $sqlImage = "SELECT profile_image FROM usuarios WHERE id = :id";
@@ -98,11 +100,13 @@ if ($row2) {
         <img src="<?php echo $image_path ?>">
         <input type="file" name="profile_image" accept="image/*">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <input type="hidden" name="tipo_usuario" value="<?php echo $logado_tipoUsuario ?>">
         <input type="submit" value="Carregar Foto">
       </form>
       <div id="alert" style="display: none;"></div>
       <form id="delete-form" action="../components/delete_image.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <input type="hidden" name="tipo_usuario" value="<?php echo $logado_tipoUsuario ?>">
         <input type="submit" value="Excluir Foto" name="delete" onclick="return confirm('Tem certeza de que deseja excluir sua foto de perfil?');">
       </form>
 
