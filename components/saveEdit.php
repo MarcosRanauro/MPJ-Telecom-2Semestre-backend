@@ -21,6 +21,16 @@
 
     $result = $pdo->query($sqlUpdate);
   }
+
+  $stmt = $pdo->prepare("SELECT usu_login, usu_senha FROM usuarios WHERE id = :id");
+  $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+  $stmt->execute();
+  $newUserData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  if($newUserData) {
+    $_SESSION['usu_login'] = $newUserData['usu_login'];
+    $_SESSION['usu_senha'] = $newUserData['usu_senha'];
+  }
   header('Location: ../pages/perfilMaster.php');
 
 ?>
