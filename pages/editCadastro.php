@@ -125,8 +125,15 @@ if (!empty($_GET['id'])) {
                             A senha deve ser exatamente igual a anterior.
                         </span>
                     </div>
-                    <label for="tipo_usuario" class="col-form-label">Tipo de Usuário</label>
-                    <input type="text" name="tipo_usuario" id="tipo_usuario" value="<?php echo $tipoUsuario ?>">
+                    
+                    <!-- <label for="tipo_usuario" class="col-form-label">Tipo de Usuário</label>
+                    <input type="text" name="tipo_usuario" id="tipo_usuario" value="<?php echo $tipoUsuario ?>"> -->
+
+                    <label class="col-form-label" for="tipo_usuario">Tipo de Usuário:</label>
+                    <select class="form-control" id="tipo_usuario" name="tipo_usuario">
+                        <option value="master" <?php echo ($tipoUsuario == 'master') ? 'selected' : '' ?>>Master</option>
+                        <option value="comum" <?php echo ($tipoUsuario == 'comum') ? 'selected' : '' ?>>Comum</option>
+                    </select>
 
                     <span id="confirm-password-error" class="error-message"></span>
                     <fieldset class="main-agreement">

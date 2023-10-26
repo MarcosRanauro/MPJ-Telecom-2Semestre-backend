@@ -64,7 +64,7 @@ $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
 if ($row2) {
   $image_data = $row2['profile_image'];
-  if($image_data !== null) {
+  if ($image_data !== null) {
     $image_path = 'data:image/jpeg;base64,' . base64_encode($image_data);
   }
 }
@@ -89,39 +89,46 @@ if ($row2) {
   <?php } else { ?>
     <?php require_once('../components/headerDefault.php'); ?>
   <?php } ?>
+  <div class="container-titulo">
+    <h1>Perfil do Usuário</h1>
+  </div>
   <div class="m-1 container-master">
     <div class="container-perfil">
       <div class="container-imagem">
         <form id="upload-form" action="../components/upload.php" method="POST" enctype="multipart/form-data">
-          <img src="<?php echo $image_path ?>">
-          <input type="file" name="profile_image" accept="image/*">
-          <input type="hidden" name="id" value="<?php echo $id; ?>">
-          <input type="hidden" name="tipo_usuario" value="<?php echo $logado_tipo_usuario ?>">
-          <input type="submit" value="Carregar Foto">
+          <div class="image-preview">
+            <img src="<?php echo $image_path ?>">
+          </div>
+          <div class="container-buttons">
+            <input type="file" class="upload-files" name="profile_image" accept="image/*">
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
+            <input type="hidden" name="tipo_usuario" value="<?php echo $logado_tipo_usuario ?>">
+            <input type="submit" class="upload-button" value="Carregar Foto">
+          </div>
         </form>
         <div id="alert" style="display: none;"></div>
         <form id="delete-form" action="../components/delete_image.php" method="POST">
           <input type="hidden" name="id" value="<?php echo $id; ?>">
           <input type="hidden" name="tipo_usuario" value="<?php echo $logado_tipo_usuario ?>">
-          <input type="submit" value="Excluir Foto" name="delete" onclick="return confirm('Tem certeza de que deseja excluir sua foto de perfil?');">
+          <input type="submit" class="delete-button" value="Excluir Foto" name="delete" onclick="return confirm('Tem certeza de que deseja excluir sua foto de perfil?');">
         </form>
-
       </div>
+
 
       <div class="container-infos">
-        <h1>Perfil do Usuário</h1>
-        Bem vindo ao perfil de Usúario Master, <?php echo $logado_login; ?> <br>
-        Nome: <?php echo $logado_nome; ?><br>
-        E-Mail: <?php echo $logado_email; ?><br>
-        Sexo: <?php echo $logado_sexo; ?><br>
-        Data de Nascimento: <?php echo formatData($logado_dataNasc); ?> <br>
-        Nome da Mãe: <?php echo $logado_nomeMaterno; ?> <br>
-        CPF: <?php echo $logado_cpf; ?> <br>
-        Celular: <?php echo $logado_celular; ?> <br>
-        Telefone Fixo: <?php echo $logado_telefoneFixo; ?> <br>
-        Endereço: <?php echo $logado_endereco; ?> <br>
+        <h2>Bem vindo ao perfil de Administrador, <?php echo $logado_login; ?></h2>
+        <p>Nome: <?php echo $logado_nome; ?></p>
+        <p>E-Mail: <?php echo $logado_email; ?></p>
+        <p>Sexo: <?php echo $logado_sexo; ?></p>
+        <p>Data de Nascimento: <?php echo formatData($logado_dataNasc); ?></p>
+        <p>Nome da Mãe: <?php echo $logado_nomeMaterno; ?></p>
+        <p>CPF: <?php echo $logado_cpf; ?></p>
+        <p>Celular: <?php echo $logado_celular; ?></p>
+        <p>Telefone Fixo: <?php echo $logado_telefoneFixo; ?></p>
+        <p>Endereço: <?php echo $logado_endereco; ?></p>
         <a class="btn btn-primary" href="mensagensSuporte.php" role="button">Mensagens do Suporte</a>
       </div>
+
     </div>
     <div class="container-pesquisa">
       <h3>Pesquisa de Usuarios</h3>
