@@ -1,21 +1,52 @@
+.container-inativo {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
 form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  background-color: #c8c1f0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  max-width: 400px;
+  margin: 0 auto;
 }
 
-span {
-  flex: 1;
-  min-width: 200px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
+form span {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+  margin: 10px;
+  align-items: center;
 }
 
-input,
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 textarea {
   width: 100%;
-  padding: 5px;
-  margin-top: 5px;
+  padding: 10px;
   border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3;
 }

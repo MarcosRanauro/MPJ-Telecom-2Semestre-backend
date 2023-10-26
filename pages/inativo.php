@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
 
 <body>
   <?php include_once('../components/headerDefault.php'); ?>
-  <main>
+  <main class="container-inativo">
     <h1>Seu perfil está inativo, favor entrar em contato com o suporte.</h1>
     <form action="inativo.php" method="POST">
       <span>

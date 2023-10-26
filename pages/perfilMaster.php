@@ -27,7 +27,9 @@ $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
+  $id = $row['id'];
   $logado_nome = $row['usu_nome'];
+  $logado_email = $row['usu_email'];
   $logado_dataNasc = $row['usu_dataNasc'];
   $logado_sexo = $row['usu_sexo'];
   $logado_nomeMaterno = $row['usu_nomeMaterno'];
@@ -35,8 +37,10 @@ if ($stmt->rowCount() > 0) {
   $logado_celular = $row['usu_celular'];
   $logado_telefoneFixo = $row['usu_telefoneFixo'];
   $logado_endereco = $row['usu_endereco'];
+  $logado_tipo_usuario = $row['tipo_usuario'];
 } else {
   $logado_nome = "Não encontrado";
+  $logado_email = "Não encontrado";
   $logado_dataNasc = "Não encontrado";
   $logado_sexo = "Não encontrado";
   $logado_nomeMaterno = "Não encontrado";
@@ -44,10 +48,26 @@ if ($stmt->rowCount() > 0) {
   $logado_celular = "Não encontrado";
   $logado_telefoneFixo = "Não encontrado";
   $logado_endereco = "Não encontrado";
+  $logado_tipo_usuario = "Não encontrado";
 }
 
 $sql_dadosDB = "SELECT * FROM usuarios ORDER BY usu_nome";
 $result_dadosDB = $pdo->query($sql_dadosDB);
+
+include_once('../components/formatDate.php');
+
+$sqlImage = "SELECT profile_image FROM usuarios WHERE id = :id";
+$stmt2 = $pdo->prepare($sqlImage);
+$stmt2->bindParam(':id', $id, PDO::PARAM_INT);
+$stmt2->execute();
+$row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+if ($row2) {
+  $image_data = $row2['profile_image'];
+  if($image_data !== null) {
+    $image_path = 'data:image/jpeg;base64,' . base64_encode($image_data);
+  }
+}
 
 ?>
 
@@ -59,6 +79,7 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <link href="../styles/perfilMaster.css" rel="stylesheet">
   <title>Perfil Master</title>
 </head>
 
@@ -68,26 +89,61 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
   <?php } else { ?>
     <?php require_once('../components/headerDefault.php'); ?>
   <?php } ?>
-  <div class="m-1">
-    <h1>Perfil Master</h1>
-    <div>
-      Bem vindo ao perfil de Usúario Master, <?php echo $logado_login; ?> <br>
-      Nome: <?php echo $logado_nome; ?><br>
-      Sexo: <?php echo $logado_sexo; ?><br>
-      Data de Nascimento: <?php echo $logado_dataNasc; ?> <br>
-      Nome da Mãe: <?php echo $logado_nomeMaterno; ?> <br>
-      CPF: <?php echo $logado_cpf; ?> <br>
-      Celular: <?php echo $logado_celular; ?> <br>
-      Telefone Fixo: <?php echo $logado_telefoneFixo; ?> <br>
-      Endereço: <?php echo $logado_endereco; ?> <br>
+  <div class="m-1 container-master">
+    <div class="container-perfil">
+      <div class="container-imagem">
+        <form id="upload-form" action="../components/upload.php" method="POST" enctype="multipart/form-data">
+          <img src="<?php echo $image_path ?>">
+          <input type="file" name="profile_image" accept="image/*">
+          <input type="hidden" name="id" value="<?php echo $id; ?>">
+          <input type="hidden" name="tipo_usuario" value="<?php echo $logado_tipo_usuario ?>">
+          <input type="submit" value="Carregar Foto">
+        </form>
+        <div id="alert" style="display: none;"></div>
+        <form id="delete-form" action="../components/delete_image.php" method="POST">
+          <input type="hidden" name="id" value="<?php echo $id; ?>">
+          <input type="hidden" name="tipo_usuario" value="<?php echo $logado_tipo_usuario ?>">
+          <input type="submit" value="Excluir Foto" name="delete" onclick="return confirm('Tem certeza de que deseja excluir sua foto de perfil?');">
+        </form>
+
+      </div>
+
+      <div class="container-infos">
+        <h1>Perfil do Usuário</h1>
+        Bem vindo ao perfil de Usúario Master, <?php echo $logado_login; ?> <br>
+        Nome: <?php echo $logado_nome; ?><br>
+        E-Mail: <?php echo $logado_email; ?><br>
+        Sexo: <?php echo $logado_sexo; ?><br>
+        Data de Nascimento: <?php echo formatData($logado_dataNasc); ?> <br>
+        Nome da Mãe: <?php echo $logado_nomeMaterno; ?> <br>
+        CPF: <?php echo $logado_cpf; ?> <br>
+        Celular: <?php echo $logado_celular; ?> <br>
+        Telefone Fixo: <?php echo $logado_telefoneFixo; ?> <br>
+        Endereço: <?php echo $logado_endereco; ?> <br>
+        <a class="btn btn-primary" href="mensagensSuporte.php" role="button">Mensagens do Suporte</a>
+      </div>
     </div>
-    <a class="btn btn-primary" href="mensagensSuporte.php" role="button">Mensagens do Suporte</a>
+    <div class="container-pesquisa">
+      <h3>Pesquisa de Usuarios</h3>
+      <select id="criteria" class="form-select form-select-sm" aria-label="Small select example">
+        <option selected>Escolha o Parâmetro de Pesquisa</option>
+        <option value="email">E-Mail</option>
+        <option value="nome">Nome</option>
+        <option value="id">ID</option>
+        <option value="cpf">CPF</option>
+      </select>
+      <input type="search" class="form-control rounded" placeholder="Pesquisar" id="pesquisar" />
+      <button type="button" class="btn btn-outline-primary" id="btn-pesquisar"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+        </svg></button>
+    </div>
     <div>
       <table class="table table-success table-striped">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">id</th>
             <th scope="col">Nome</th>
+            <th scope="col">E-Mail</th>
             <th scope="col">Data de Nascimento</th>
             <th scope="col">Genero</th>
             <th scope="col">Nome Materno</th>
@@ -107,12 +163,13 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
           <?php
           while ($user_data = $result_dadosDB->fetch(PDO::FETCH_ASSOC)) {
             echo "<tr>";
-            echo "<td>" . $user_data['id'] . "</td>";
-            echo "<td>" . $user_data['usu_nome'] . "</td>";
+            echo "<td data-criteria='id'>" . $user_data['id'] . "</td>";
+            echo "<td data-criteria='nome'>" . $user_data['usu_nome'] . "</td>";
+            echo "<td data-criteria='email'>" . $user_data['usu_email'] . "</td>";
             echo "<td>" . $user_data['usu_dataNasc'] . "</td>";
             echo "<td>" . $user_data['usu_sexo'] . "</td>";
             echo "<td>" . $user_data['usu_nomeMaterno'] . "</td>";
-            echo "<td>" . $user_data['usu_cpf'] . "</td>";
+            echo "<td data-criteria='cpf'>" . $user_data['usu_cpf'] . "</td>";
             echo "<td>" . $user_data['usu_celular'] . "</td>";
             echo "<td>" . $user_data['usu_telefoneFixo'] . "</td>";
             echo "<td>" . $user_data['usu_endereco'] . "</td>";
@@ -145,5 +202,40 @@ $result_dadosDB = $pdo->query($sql_dadosDB);
   </div>
   <?php require_once('../components/footer.php'); ?>
 </body>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const selectCriteria = document.getElementById("criteria");
+    const inputPesquisar = document.getElementById("pesquisar");
+    const btnPesquisar = document.getElementById("btn-pesquisar");
+    const tabelaUsuarios = document.querySelector(".table tbody");
+
+    btnPesquisar.addEventListener("click", function() {
+      realizarPesquisa();
+    });
+
+    inputPesquisar.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        realizarPesquisa();
+      }
+    });
+
+    function realizarPesquisa() {
+      const termoPesquisa = inputPesquisar.value.toLowerCase();
+      const criterio = selectCriteria.value;
+      const linhas = tabelaUsuarios.querySelectorAll("tr");
+
+      linhas.forEach(function(linha) {
+        const textoCelula = linha.querySelector(`td[data-criteria="${criterio}"]`).textContent.toLowerCase();
+
+        if (textoCelula.includes(termoPesquisa)) {
+          linha.style.display = "";
+        } else {
+          linha.style.display = "none";
+        }
+      });
+    }
+  });
+</script>
 
 </html>
