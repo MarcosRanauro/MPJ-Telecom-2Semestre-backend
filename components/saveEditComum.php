@@ -16,6 +16,27 @@
     $senha = $_POST['password'];
     $confirmarSenha = $_POST['confirm-password'];
 
+    $errors = array();
+
+    if (strlen($nomeLogin) !== 6) {
+        $errors[] = "O campo de Login deve ter exatamente 6 letras.";
+    }
+
+    if (strlen($senha) !== 8 || strlen($confirmarSenha) !== 8) {
+        $errors[] = "A senha deve ter exatamente 8 letras.";
+    }
+
+    if ($senha !== $confirmarSenha) {
+        $errors[] = "As senhas não coincidem. Por favor, verifique.";
+    }
+
+    if (count($errors) > 0) {
+        $errorMessages = json_encode($errors);
+
+        header("Location: ../components/erro.php?errors=$errorMessages");
+        exit;
+    }
+
     $sqlUpdate = "UPDATE usuarios SET usu_nome = '$nome', usu_email = '$email', usu_dataNasc = '$dataNasc', usu_sexo = '$sexo', usu_nomeMaterno = '$nomeMaterno', usu_cpf = '$cpf', usu_celular = '$celular', usu_telefoneFixo = '$telefoneFixo', usu_endereco = '$endereco', usu_login = '$nomeLogin', usu_senha = '$senha', usu_confirmarSenha = '$confirmarSenha' WHERE id = '$id'";
 
     $result = $pdo->query($sqlUpdate);

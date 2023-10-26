@@ -17,19 +17,30 @@
     $confirmarSenha = $_POST['confirm-password'];
     $tipoUsuario = $_POST['tipo_usuario'];
 
+    $errors = array();
+
+    if (strlen($nomeLogin) !== 6) {
+        $errors[] = "O campo de Login deve ter exatamente 6 letras.";
+    }
+
+    if (strlen($senha) !== 8 || strlen($confirmarSenha) !== 8) {
+        $errors[] = "A senha deve ter exatamente 8 letras.";
+    }
+
+    if ($senha !== $confirmarSenha) {
+        $errors[] = "As senhas não coincidem. Por favor, verifique.";
+    }
+
+    if (count($errors) > 0) {
+        $errorMessages = json_encode($errors);
+
+        header("Location: ../components/erro.php?errors=$errorMessages");
+        exit;
+    }
+
     $sqlUpdate = "UPDATE usuarios SET usu_nome = '$nome', usu_email = '$email', usu_dataNasc = '$dataNasc', usu_sexo = '$sexo', usu_nomeMaterno = '$nomeMaterno', usu_cpf = '$cpf', usu_celular = '$celular', usu_telefoneFixo = '$telefoneFixo', usu_endereco = '$endereco', usu_login = '$nomeLogin', usu_senha = '$senha', usu_confirmarSenha = '$confirmarSenha', tipo_usuario = '$tipoUsuario' WHERE id = '$id'";
 
     $result = $pdo->query($sqlUpdate);
-  }
-
-  $stmt = $pdo->prepare("SELECT usu_login, usu_senha FROM usuarios WHERE id = :id");
-  $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-  $stmt->execute();
-  $newUserData = $stmt->fetch(PDO::FETCH_ASSOC);
-
-  if($newUserData) {
-    $_SESSION['usu_login'] = $newUserData['usu_login'];
-    $_SESSION['usu_senha'] = $newUserData['usu_senha'];
   }
   header('Location: ../pages/perfilMaster.php');
 
