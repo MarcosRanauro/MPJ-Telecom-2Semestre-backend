@@ -21,6 +21,7 @@ $result_dados_suporte = $pdo->query($sql_dados_suporte);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="../styles/mensagemSuporte.css">
+  <link rel="stylesheet" href="../styles/header_footer.css">
   <link rel="stylesheet" href="../fontawesome-free-6.4.0-web/css/all.min.css">
   <title>Mensagens Suporte</title>
 </head>
@@ -37,7 +38,7 @@ $result_dados_suporte = $pdo->query($sql_dados_suporte);
     <table class="table table-success table-striped">
       <thead>
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">id</th>
           <th scope="col">Nome</th>
           <th scope="col">E-Mail</th>
           <th scope="col">Mensagem</th>

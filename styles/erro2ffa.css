@@ -4,7 +4,7 @@ body {
   min-height: 100vh;
 }
 
-.container-main {
+main {
   display: flex;
   flex: 1; /* Ocupa o espaço restante vertical */
   justify-content: center;

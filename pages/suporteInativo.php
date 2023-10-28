@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="../styles/2ffa.css">
+  <link rel="stylesheet" href="../styles/header_footer.css">
   <link rel="stylesheet" href="../styles/inativo.css">
   <link rel="stylesheet" href="../fontawesome-free-6.4.0-web/css/all.min.css">
   <title>Perfil Inativo</title>
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
   <?php include_once('../components/headerDefault.php'); ?>
   <main class="container-inativo">
     <h1>Seu perfil está inativo, favor entrar em contato com o suporte.</h1>
-    <form action="inativo.php" method="POST">
+    <form action="suporteInativo.php" method="POST">
       <span>
         Nome completo:
         <input type="text" name="nome" placeholder="Nome">

@@ -12,7 +12,7 @@ if (verificarToken($token_key)) {
 }
 
 if (!isset($_SESSION['tipo_usuario'])) {
-    $_SESSION['tipo_usuario'] = ''; // Defina um valor padrão, se necessário
+    $_SESSION['tipo_usuario'] = '';
 }
 
 ?>
@@ -26,6 +26,7 @@ if (!isset($_SESSION['tipo_usuario'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/header_footer.css">
     <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.min.css">
     <title>MPJ</title>
 </head>
