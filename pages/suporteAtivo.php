@@ -40,8 +40,14 @@ if (isset($_POST['submit'])) {
   $stmt_form->bindParam(':email_form', $email_form, PDO::PARAM_STR);
   $stmt_form->bindParam(':mensagem_form', $mensagem_form, PDO::PARAM_STR);
   $stmt_form->execute();
-  echo "<script>alert('Mensagem enviada com sucesso!');</script>";
-  echo "<script>window.location = 'perfilMaster.php';</script>";
+
+  if ($tipo_usuario == 'master') {
+    echo "<script>alert('Mensagem enviada com sucesso!');</script>";
+    echo "<script>window.location = 'perfilMaster.php';</script>";
+  } else {
+    echo "<script>alert('Mensagem enviada com sucesso!');</script>";
+    echo "<script>window.location = 'perfil.php';</script>";
+  }
 }
 
 ?>
@@ -69,15 +75,15 @@ if (isset($_POST['submit'])) {
     <form class="form-ativo" action="suporteAtivo.php" method="POST">
       <span>
         id:
-        <input type="text" name="id" placeholder="id" value="<?php echo $id ?>">
+        <input class="readonly" type="text" name="id" placeholder="id" value="<?php echo $id ?>" readonly>
       </span>
       <span>
         Nome completo:
-        <input type="text" name="nome" placeholder="Nome" value="<?php echo $nome ?>">
+        <input class="readonly" type="text" name="nome" placeholder="Nome" value="<?php echo $nome ?>" readonly>
       </span>
       <span>
         E-mail:
-        <input type="email" name="email" placeholder="E-mail" value="<?php echo $email ?>">
+        <input class="readonly" type="email" name="email" placeholder="E-mail" value="<?php echo $email ?>" readonly>
       </span>
       <span>
         Mensagem:

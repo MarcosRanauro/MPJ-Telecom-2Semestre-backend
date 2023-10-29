@@ -6,7 +6,7 @@ if (isset($_POST['submit'])) {
   $email = $_POST['email'];
   $mensagem = $_POST['mensagem'];
 
-  $sql = "INSERT INTO suporte_contato (nome, email, mensagem) VALUES (:nome, :email, :mensagem)";
+  $sql = "INSERT INTO suporte_inativo (nome, email, mensagem) VALUES (:nome, :email, :mensagem)";
   $stmt = $pdo->prepare($sql);
   $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
   $stmt->bindParam(':email', $email, PDO::PARAM_STR);
