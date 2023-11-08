@@ -9,9 +9,9 @@ if (!isset($_SESSION['usu_login']) || !isset($_SESSION['usu_senha']) || !isset($
   header('Location: Login.php');
 }
 
-if(isset($_GET['id'])){
+if(isset($_GET['id'])) {
   $id = $_GET['id'];
-  $sql = "DELETE FROM suporte WHERE id = $id";
+  $sql = "DELETE FROM suporte_inativo WHERE id = $id";
   $result = $pdo->query($sql);
   header('Location: ../pages/mensagensSuporte.php');
 }

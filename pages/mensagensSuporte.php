@@ -90,7 +90,7 @@ $result_dados_suporte_inativos = $pdo->query($sql_dados_suporte_inativos);
             echo "<td>" . $user_data_suporte_inativos['email'] . "</td>";
             echo "<td>" . $user_data_suporte_inativos['cpf'] . "</td>";
             echo "<td>" . $user_data_suporte_inativos['mensagem'] . "</td>";
-            echo "<td>" . "<a href='../components/deletarSuporte.php?id=$user_data_suporte_inativos[id]'><i class='fas fa-trash-alt btn btn-danger'></i></a>" . "</td>";
+            echo "<td>" . "<a href='../components/deletarSuporteInativo.php?id=$user_data_suporte_inativos[id]'><i class='fas fa-trash-alt btn btn-danger'></i></a>" . "</td>";
             echo "</tr>";
           }
           ?>
