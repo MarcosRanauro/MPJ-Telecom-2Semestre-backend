@@ -48,6 +48,7 @@ $result_dados_suporte_inativos = $pdo->query($sql_dados_suporte_inativos);
             <th scope="col">Nome</th>
             <th scope="col">E-Mail</th>
             <th scope="col">Mensagem</th>
+            <th scope="col">Deletar</th>
           </tr>
         </thead>
         <tbody>
@@ -58,6 +59,7 @@ $result_dados_suporte_inativos = $pdo->query($sql_dados_suporte_inativos);
             echo "<td>" . $user_data_suporte['nome'] . "</td>";
             echo "<td>" . $user_data_suporte['email'] . "</td>";
             echo "<td>" . $user_data_suporte['mensagem'] . "</td>";
+            echo "<td>" . "<a href='../components/deletarSuporte.php?id=$user_data_suporte[id]'><i class='fas fa-trash-alt btn btn-danger'></i></a>" . "</td>";
             echo "</tr>";
           }
           ?>
@@ -73,6 +75,7 @@ $result_dados_suporte_inativos = $pdo->query($sql_dados_suporte_inativos);
             <th scope="col">Nome</th>
             <th scope="col">E-Mail</th>
             <th scope="col">Mensagem</th>
+            <th scope="col">Deletar</th>
           </tr>
         </thead>
         <tbody>
@@ -83,6 +86,7 @@ $result_dados_suporte_inativos = $pdo->query($sql_dados_suporte_inativos);
             echo "<td>" . $user_data_suporte_inativos['nome'] . "</td>";
             echo "<td>" . $user_data_suporte_inativos['email'] . "</td>";
             echo "<td>" . $user_data_suporte_inativos['mensagem'] . "</td>";
+            echo "<td>" . "<a href='../components/deletarSuporte.php?id=$user_data_suporte_inativos[id]'><i class='fas fa-trash-alt btn btn-danger'></i></a>" . "</td>";
             echo "</tr>";
           }
           ?>
