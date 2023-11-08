@@ -4,12 +4,14 @@ if (isset($_POST['submit'])) {
 
   $nome = $_POST['nome'];
   $email = $_POST['email'];
+  $cpf = $_POST['cpf'];
   $mensagem = $_POST['mensagem'];
 
-  $sql = "INSERT INTO suporte_inativo (nome, email, mensagem) VALUES (:nome, :email, :mensagem)";
+  $sql = "INSERT INTO suporte_inativo (nome, email, cpf, mensagem) VALUES (:nome, :email, :cpf, :mensagem)";
   $stmt = $pdo->prepare($sql);
   $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
   $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+  $stmt->bindParam(':cpf', $cpf, PDO::PARAM_STR);
   $stmt->bindParam(':mensagem', $mensagem, PDO::PARAM_STR);
   $stmt->execute();
   echo "<script>alert('Mensagem enviada com sucesso!');</script>";
@@ -46,6 +48,10 @@ if (isset($_POST['submit'])) {
         <input type="email" name="email" placeholder="E-mail">
       </span>
       <span>
+        CPF:
+        <input type="text" name="cpf" placeholder="CPF" oninput="formatCPF(this)">
+      </span>
+      <span>
         Mensagem:
         <textarea name="mensagem" id="mensagem" cols="30" rows="10"></textarea>
       </span>
@@ -53,6 +59,7 @@ if (isset($_POST['submit'])) {
     </form>
   </main>
   <?php include_once('../components/footer.php'); ?>
+  <script src="../js/formatCPF.js"></script>
 </body>
 
 </html>

@@ -44,7 +44,8 @@ $result_dados_suporte_inativos = $pdo->query($sql_dados_suporte_inativos);
       <table class="table table-success table-striped">
         <thead>
           <tr>
-            <th scope="col">Id de Usuario</th>
+            <th scope="col">Id</th>
+            <th scope="col">Id da Tabela Usuários</th>
             <th scope="col">Nome</th>
             <th scope="col">E-Mail</th>
             <th scope="col">Mensagem</th>
@@ -55,6 +56,7 @@ $result_dados_suporte_inativos = $pdo->query($sql_dados_suporte_inativos);
           <?php
           while ($user_data_suporte = $result_dados_suporte->fetch(PDO::FETCH_ASSOC)) {
             echo "<tr>";
+            echo "<td>" . $user_data_suporte['id'] . "</td>";
             echo "<td>" . $user_data_suporte['usuario_id'] . "</td>";
             echo "<td>" . $user_data_suporte['nome'] . "</td>";
             echo "<td>" . $user_data_suporte['email'] . "</td>";
@@ -74,6 +76,7 @@ $result_dados_suporte_inativos = $pdo->query($sql_dados_suporte_inativos);
             <th scope="col">Id</th>
             <th scope="col">Nome</th>
             <th scope="col">E-Mail</th>
+            <th scope="col">CPF</th>
             <th scope="col">Mensagem</th>
             <th scope="col">Deletar</th>
           </tr>
@@ -85,6 +88,7 @@ $result_dados_suporte_inativos = $pdo->query($sql_dados_suporte_inativos);
             echo "<td>" . $user_data_suporte_inativos['id'] . "</td>";
             echo "<td>" . $user_data_suporte_inativos['nome'] . "</td>";
             echo "<td>" . $user_data_suporte_inativos['email'] . "</td>";
+            echo "<td>" . $user_data_suporte_inativos['cpf'] . "</td>";
             echo "<td>" . $user_data_suporte_inativos['mensagem'] . "</td>";
             echo "<td>" . "<a href='../components/deletarSuporte.php?id=$user_data_suporte_inativos[id]'><i class='fas fa-trash-alt btn btn-danger'></i></a>" . "</td>";
             echo "</tr>";
