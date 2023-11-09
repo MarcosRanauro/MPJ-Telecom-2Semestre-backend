@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
     if (count($errors) > 0) {
         $errorMessages = json_encode($errors);
 
-        header("Location: ../components/erro.php?errors=$errorMessages");
+        header("Location: erroEditCadastro.php?errors=$errorMessages");
         exit;
     } else {
         $sql = "INSERT INTO usuarios(usu_nome, usu_email, usu_dataNasc, usu_sexo, usu_nomeMaterno, usu_cpf, usu_celular, usu_telefoneFixo, usu_endereco, usu_login, usu_senha, usu_confirmarSenha) VALUES (:nome, :email, :dataNascimento, :sexo, :nomeMaterno, :cpf, :cellPhone, :phone, :endereco, :loginName, :password, :confirmPassword)";
@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
             header("Location: Login.php");
             exit;
         } else {
-            header("Location: ../components/erro.php");
+            header("Location: erroEditCadastro.php");
             exit;
         }
     }
@@ -70,6 +70,7 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/Cadastro.css">
+    <link rel="stylesheet" href="../styles/header_footer.css">
     <title>Cadastro</title>
 </head>
 

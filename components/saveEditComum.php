@@ -33,7 +33,7 @@
     if (count($errors) > 0) {
         $errorMessages = json_encode($errors);
 
-        header("Location: ../components/erro.php?errors=$errorMessages");
+        header("Location: ../pages/erroEditCadastro.php?errors=$errorMessages");
         exit;
     }
 

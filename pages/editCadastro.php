@@ -42,6 +42,7 @@ if (!empty($_GET['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/Cadastro.css">
+    <link rel="stylesheet" href="../styles/header_footer.css">
     <title>Editar Cadastro</title>
 </head>
 
@@ -125,8 +126,12 @@ if (!empty($_GET['id'])) {
                             A senha deve ser exatamente igual a anterior.
                         </span>
                     </div>
-                    <label for="tipo_usuario" class="col-form-label">Tipo de Usuário</label>
-                    <input type="text" name="tipo_usuario" id="tipo_usuario" value="<?php echo $tipoUsuario ?>">
+
+                    <label class="col-form-label" for="tipo_usuario">Tipo de Usuário:</label>
+                    <select class="form-control" id="tipo_usuario" name="tipo_usuario">
+                        <option value="master" <?php echo ($tipoUsuario == 'master') ? 'selected' : '' ?>>Master</option>
+                        <option value="comum" <?php echo ($tipoUsuario == 'comum') ? 'selected' : '' ?>>Comum</option>
+                    </select>
 
                     <span id="confirm-password-error" class="error-message"></span>
                     <fieldset class="main-agreement">

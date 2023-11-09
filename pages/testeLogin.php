@@ -53,7 +53,7 @@ if (isset($_POST['submit']) && !empty($_POST['login']) && !empty($_POST['pass'])
       unset($_SESSION['role']);
       unset($_SESSION['tipo_usuario']);
       unset($_SESSION['usu_estado']);
-      header('Location: inativo.php');
+      header('Location: suporteInativo.php');
     }
   }
 } else {
