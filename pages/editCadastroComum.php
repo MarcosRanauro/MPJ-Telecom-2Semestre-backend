@@ -1,36 +1,36 @@
 <?php
 session_start();
 if (!empty($_GET['id'])) {
-  include_once('../components/config.php');
+    include_once('../components/config.php');
 
-  $id = $_GET['id'];
+    $id = $_GET['id'];
 
-  // Prepare a consulta SQL
-  $sqlSelectComum = "SELECT * FROM usuarios WHERE id = :id";
-  $stmt = $pdo->prepare($sqlSelectComum);
-  $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-  $stmt->execute();
+    // Prepare a consulta SQL
+    $sqlSelectComum = "SELECT * FROM usuarios WHERE id = :id";
+    $stmt = $pdo->prepare($sqlSelectComum);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
 
-  // Verificar se a consulta retornou resultados
-  if ($stmt->rowCount() > 0) {
-    $user_data_comum = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Verificar se a consulta retornou resultados
+    if ($stmt->rowCount() > 0) {
+        $user_data_comum = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $id = $user_data_comum['id'];
-    $nome = $user_data_comum['usu_nome'];
-    $email = $user_data_comum['usu_email'];
-    $dataNascimento = $user_data_comum['usu_dataNasc'];
-    $sexo = $user_data_comum['usu_sexo'];
-    $nomeMaterno = $user_data_comum['usu_nomeMaterno'];
-    $cpf = $user_data_comum['usu_cpf'];
-    $cellPhone = $user_data_comum['usu_celular'];
-    $phone = $user_data_comum['usu_telefoneFixo'];
-    $endereco = $user_data_comum['usu_endereco'];
-    $loginName = $user_data_comum['usu_login'];
-    $password = $user_data_comum['usu_senha'];
-    $confirmPassword = $user_data_comum['usu_confirmarSenha'];
-  } else {
-    header('Location: perfil.php');
-  }
+        $id = $user_data_comum['id'];
+        $nome = $user_data_comum['usu_nome'];
+        $email = $user_data_comum['usu_email'];
+        $dataNascimento = $user_data_comum['usu_dataNasc'];
+        $sexo = $user_data_comum['usu_sexo'];
+        $nomeMaterno = $user_data_comum['usu_nomeMaterno'];
+        $cpf = $user_data_comum['usu_cpf'];
+        $cellPhone = $user_data_comum['usu_celular'];
+        $phone = $user_data_comum['usu_telefoneFixo'];
+        $endereco = $user_data_comum['usu_endereco'];
+        $loginName = $user_data_comum['usu_login'];
+        $password = $user_data_comum['usu_senha'];
+        $confirmPassword = $user_data_comum['usu_confirmarSenha'];
+    } else {
+        header('Location: perfil.php');
+    }
 }
 ?>
 
@@ -61,7 +61,7 @@ if (!empty($_GET['id'])) {
       <form action="../components/saveEditComum.php" method="POST" class="container" id="form">
         <div class="form-control form-control-lg input-container">
           <h1>Editar Cadastro</h1>
-          
+
           <label for="nome" class="col-form-label">Nome</label>
           <input class="form-control" type="text" name="nome" id="nome" minlength="15" maxlength="60" require value="<?php echo $nome ?>">
 
@@ -83,7 +83,7 @@ if (!empty($_GET['id'])) {
           <input class="form-control" type="text" name="nomeMaterno" id="nomeMaterno" minlength="15" maxlength="60" value="<?php echo $nomeMaterno ?>">
 
           <label class=" col-form-label" for="cpf">CPF:</label>
-          <input class="form-control" type="text" id="cpf" name="cpf" placeholder="XXX.XXX.XXX-XX" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" value="<?php echo $cpf ?>">
+          <input class="form-control" type="text" id="cpf" name="cpf" placeholder="XXX.XXX.XXX-XX" oninput="formatCPF(this)" value="<?php echo $cpf ?>" required>
 
 
           <label for="cell-phone" class="col-form-label">Telefone Celular</label>
@@ -146,7 +146,7 @@ if (!empty($_GET['id'])) {
   <script src="../js/cleave.min.js"></script>
   <script src="../js/cleave-phone.br.js"></script>
   <script src="../js/Cadastro.js"></script>
-
+  <script src="../js/formatCPF.js"></script>
 </body>
 
 </html>
