@@ -8,4 +8,4 @@
 <br>
 <p></p>Ambiente de produção no Railway.</p>
 <p></p>Site no ar: mpjtelecom-production.up.railway.app</p>
-<p>Desenvolvimento Fullsatack com PHP + MySQL</p>
+<p>Desenvolvimento Fullstack com PHP + MySQL</p>
