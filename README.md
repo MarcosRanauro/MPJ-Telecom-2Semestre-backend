@@ -6,5 +6,6 @@
 
 ## Repositório de desenvolvimento do projeto de backend do segundo semestre de ADS - Unissuam.
 <br>
-<p></p>Ambiente de produção no Railway.</p><br>
-<p></p>Site no ar: mpjtelecom-production.up.railway.app</p><br>
+<p></p>Ambiente de produção no Railway.</p>
+<p></p>Site no ar: mpjtelecom-production.up.railway.app</p>
+<p>Desenvolvimento Fullsatack com PHP + MySQL</p>
