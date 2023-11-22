@@ -213,3 +213,9 @@ footer span {
 }
 
 /* Fim do CSS do rodapé */
+
+@media (max-width: 1024px) {
+  .cabecalho-primario {
+    display: none;
+  }
+}
