@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="../styles/2ffa.css">
   <link rel="stylesheet" href="../styles/header_footer.css">
   <link rel="stylesheet" href="../fontawesome-free-6.4.0-web/css/all.min.css">
-  <script src="../js/formatCPF.js"></script>
   <title>Autenticação</title>
 </head>
 
@@ -23,6 +22,7 @@
       <a href="Login.php">Voltar</a>
   </main>
   <?php require_once('../components/footer.php'); ?>
+  <script src="../js/formatCPF.js"></script>
 </body>
 
 </html>

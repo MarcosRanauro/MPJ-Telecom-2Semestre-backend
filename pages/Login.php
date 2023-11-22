@@ -67,7 +67,7 @@
 							<button type="submit" name="submit" value="Enviar" class="login100-form-btn" id="login-btn">Enviar</button>
 						</div>
 						<span class="recuperar-senha">
-							<a href="../html/Recuperar.html">Esqueci minha senha</a>
+							<a href="../pages/Recuperar.php">Esqueci minha senha</a>
 						</span>
 					</div>
 
