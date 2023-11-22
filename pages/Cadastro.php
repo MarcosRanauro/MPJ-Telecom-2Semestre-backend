@@ -71,6 +71,7 @@ if (isset($_POST['submit'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/Cadastro.css">
     <link rel="stylesheet" href="../styles/header_footer.css">
+    <script src="../js/formatCPF.js"></script>
     <title>Cadastro</title>
 </head>
 
@@ -105,7 +106,7 @@ if (isset($_POST['submit'])) {
                     <input class="form-control" type="text" name="nomeMaterno" id="nomeMaterno" minlength="15" maxlength="60">
 
                     <label class="col-form-label" for="cpf">CPF:</label>
-                    <input class="form-control" type="text" id="cpf" name="cpf" placeholder="XXX.XXX.XXX-XX" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
+                    <input class="form-control" type="text" id="cpf" name="cpf" placeholder="XXX.XXX.XXX-XX" oninput="formatCPF(this)">
 
 
                     <label for="cell-phone" class="col-form-label">Telefone Celular</label>

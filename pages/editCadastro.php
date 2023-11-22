@@ -82,7 +82,7 @@ if (!empty($_GET['id'])) {
                     <input class="form-control" type="text" name="nomeMaterno" id="nomeMaterno" minlength="15" maxlength="60" value="<?php echo $nomeMaterno ?>">
 
                     <label class=" col-form-label" for="cpf">CPF:</label>
-                    <input class="form-control" type="text" id="cpf" name="cpf" placeholder="XXX.XXX.XXX-XX" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" value="<?php echo $cpf ?>">
+                    <input class="form-control" type="text" id="cpf" name="cpf" placeholder="XXX.XXX.XXX-XX" oninput="formatCPF(this)" value="<?php echo $cpf ?>" required>
 
 
                     <label for="cell-phone" class="col-form-label">Telefone Celular</label>
@@ -151,7 +151,7 @@ if (!empty($_GET['id'])) {
     <script src="../js/cleave.min.js"></script>
     <script src="../js/cleave-phone.br.js"></script>
     <script src="../js/Cadastro.js"></script>
-
+    <script src="../js/formatCPF.js"></script>
 </body>
 
 </html>

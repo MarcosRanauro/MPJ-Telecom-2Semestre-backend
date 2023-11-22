@@ -25,7 +25,7 @@ if (!isset($_SESSION['tipo_usuario'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/header_footer.css">
     <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.min.css">
     <title>MPJ</title>
@@ -38,14 +38,14 @@ if (!isset($_SESSION['tipo_usuario'])) {
         <?php require_once('./components/headerDefaultIndex.php'); ?>
     <?php } ?>
 
-    <main>
-        <section class="container-produto">
+    <main class="container-main">
+        <div class="container-produto">
             <h1>CPAAS, SERVIÇO DE QUALIDADE!</h1>
             <p>Venha conhecer nosso novo serviço voltado para o CPaaS!</br>
                 Saiba mais e fale com um dos nossos especialistas.</p>
             <a class="saiba-mais-button" href="./pages/produto.html">Saiba mais</a>
-        </section>
-        <section class="container-quem-somos">
+        </div>
+        <div class="container-quem-somos">
             <div class="esq-quem-somos">
                 <h1>Quem Somos</h1>
                 <p>A MJP é uma operadora de telecomunicações brasileira que oferece a seus clientes o mais alto
@@ -59,10 +59,10 @@ if (!isset($_SESSION['tipo_usuario'])) {
             <div class="dir-quem-somos">
                 <img src="img/quem-somos.png" alt="Essa é a imagem da MJP">
             </div>
-        </section>
-        <section class="container-mapa">
-            <h1>Presença em todo o Rio de Janeiro...</h1><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-        </section>
+        </div>
+        <div class="container-mapa">
+            <h1>Presença em todo o Rio de Janeiro...</h1>
+        </div>
     </main>
     <?php require_once('./components/footerIndex.php'); ?>
 
