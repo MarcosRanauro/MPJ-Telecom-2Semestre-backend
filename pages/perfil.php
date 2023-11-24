@@ -4,22 +4,22 @@ session_start();
 require_once('../components/tokenFunc.php');
 
 if (!isset($_SESSION['usu_login']) && !isset($_SESSION['usu_senha'])) {
-  unset($_SESSION['usu_login']);
-  unset($_SESSION['usu_senha']);
-  header('Location: Login.php');
+    unset($_SESSION['usu_login']);
+    unset($_SESSION['usu_senha']);
+    header('Location: Login.php');
 }
 
 $token_key = 'temp_token';
 if (!verificarToken($token_key)) {
-  unset($_SESSION['autenticado_2fa']);
-  unset($_SESSION['usu_cpf']);
-  header('Location: Login.php');
+    unset($_SESSION['autenticado_2fa']);
+    unset($_SESSION['usu_cpf']);
+    header('Location: Login.php');
 }
 
 if (!isset($_SESSION['autenticado_2fa'])) {
-  unset($_SESSION['autenticado_2fa']);
-  unset($_SESSION['usu_cpf']);
-  header('Location: 2ffa.php');
+    unset($_SESSION['autenticado_2fa']);
+    unset($_SESSION['usu_cpf']);
+    header('Location: 2ffa.php');
 }
 
 $logado_login = $_SESSION['usu_login'];
@@ -34,29 +34,29 @@ $stmt->bindParam(':logado_senha', $logado_senha, PDO::PARAM_STR);
 $stmt->execute();
 
 if ($stmt && $stmt->rowCount() > 0) {
-  $user_data_comum = $stmt->fetch(PDO::FETCH_ASSOC);
+    $user_data_comum = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  $id = $user_data_comum['id'];
-  $logado_nome = $user_data_comum['usu_nome'];
-  $logado_email = $user_data_comum['usu_email'];
-  $logado_dataNasc = $user_data_comum['usu_dataNasc'];
-  $logado_sexo = $user_data_comum['usu_sexo'];
-  $logado_nomeMaterno = $user_data_comum['usu_nomeMaterno'];
-  $logado_cpf = $user_data_comum['usu_cpf'];
-  $logado_celular = $user_data_comum['usu_celular'];
-  $logado_telefoneFixo = $user_data_comum['usu_telefoneFixo'];
-  $logado_endereco = $user_data_comum['usu_endereco'];
-  $logado_tipoUsuario = $user_data_comum['tipo_usuario'];
+    $id = $user_data_comum['id'];
+    $logado_nome = $user_data_comum['usu_nome'];
+    $logado_email = $user_data_comum['usu_email'];
+    $logado_dataNasc = $user_data_comum['usu_dataNasc'];
+    $logado_sexo = $user_data_comum['usu_sexo'];
+    $logado_nomeMaterno = $user_data_comum['usu_nomeMaterno'];
+    $logado_cpf = $user_data_comum['usu_cpf'];
+    $logado_celular = $user_data_comum['usu_celular'];
+    $logado_telefoneFixo = $user_data_comum['usu_telefoneFixo'];
+    $logado_endereco = $user_data_comum['usu_endereco'];
+    $logado_tipoUsuario = $user_data_comum['tipo_usuario'];
 } else {
-  $logado_nome = "Não encontrado";
-  $logado_email = "Não encontrado";
-  $logado_dataNasc = "Não encontrado";
-  $logado_sexo = "Não encontrado";
-  $logado_nomeMaterno = "Não encontrado";
-  $logado_cpf = "Não encontrado";
-  $logado_celular = "Não encontrado";
-  $logado_telefoneFixo = "Não encontrado";
-  $logado_endereco = "Não encontrado";
+    $logado_nome = "Não encontrado";
+    $logado_email = "Não encontrado";
+    $logado_dataNasc = "Não encontrado";
+    $logado_sexo = "Não encontrado";
+    $logado_nomeMaterno = "Não encontrado";
+    $logado_cpf = "Não encontrado";
+    $logado_celular = "Não encontrado";
+    $logado_telefoneFixo = "Não encontrado";
+    $logado_endereco = "Não encontrado";
 }
 
 include_once('../components/formatDate.php');
@@ -68,10 +68,10 @@ $stmt2->execute();
 $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
 if ($row2) {
-  $image_data = $row2['profile_image'];
-  if ($image_data !== null) {
-    $image_path = 'data:image/jpeg;base64,' . base64_encode($image_data);
-  }
+    $image_data = $row2['profile_image'];
+    if ($image_data !== null) {
+        $image_path = 'data:image/jpeg;base64,' . base64_encode($image_data);
+    }
 }
 
 ?>
@@ -124,7 +124,7 @@ if ($row2) {
         <p>Nome: <?php echo $logado_nome; ?></p>
         <p>Email: <?php echo $logado_email; ?></p>
         <p>Sexo: <?php echo $logado_sexo; ?></p>
-        <p>Data de Nascimento: <?php echo formatData($logado_dataNasc); ?></p>
+        <p>Data de Nascimento: <?php echo $logado_dataNasc; ?></p>
         <p>Nome da Mãe: <?php echo $logado_nomeMaterno; ?></p>
         <p>CPF: <?php echo $logado_cpf; ?></p>
         <p>Celular: <?php echo $logado_celular; ?></p>

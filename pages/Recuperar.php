@@ -14,7 +14,7 @@ if (isset($_POST['submit']) && !empty($_POST['cpf']) && !empty($_POST['email']))
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt->execute();
 
-    if($stmt && $stmt->rowCount() > 0) {
+    if ($stmt && $stmt->rowCount() > 0) {
         $_SESSION['usu_cpf'] = $cpf;
         $_SESSION['usu_email'] = $email;
         header('Location: alterarSenha.php');
@@ -28,7 +28,7 @@ if (isset($_POST['submit']) && !empty($_POST['cpf']) && !empty($_POST['email']))
 ?>
 
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -37,12 +37,18 @@ if (isset($_POST['submit']) && !empty($_POST['cpf']) && !empty($_POST['email']))
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/produtos.css">
     <link rel="stylesheet" href="../styles/recuperar.css">
+    <link rel="stylesheet" href="../styles/header_footer.css">
     <link rel="stylesheet" href="../fontawesome-free-6.4.0-web/css/all.min.css">
     <title>Telecall - Redefinir senha</title>
 </head>
 
-<body class="back-recuperar">
-    <div class="container">
+<body>
+    <?php if ($_SESSION['tipo_usuario']) { ?>
+        <?php require_once('../components/header.php'); ?>
+    <?php } else { ?>
+        <?php require_once('../components/headerDefault.php'); ?>
+    <?php } ?>
+    <main class="container">
         <form class="recuperar-senha" action="Recuperar.php" method="POST">
             <div class="painel">
                 <a href="../index.php">
@@ -76,7 +82,8 @@ if (isset($_POST['submit']) && !empty($_POST['cpf']) && !empty($_POST['email']))
                 </div> -->
             </div>
         </form>
-    </div>
+    </main>
+    <?php require_once('../components/footer.php'); ?>
 
     <script src="../js/formatCPF.js"></script>
 </body>
