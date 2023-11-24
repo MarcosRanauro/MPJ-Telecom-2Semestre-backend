@@ -71,7 +71,6 @@ if (isset($_POST['submit'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/Cadastro.css">
     <link rel="stylesheet" href="../styles/header_footer.css">
-    <script src="../js/formatCPF.js"></script>
     <title>Cadastro</title>
 </head>
 
@@ -92,7 +91,7 @@ if (isset($_POST['submit'])) {
                     <input class="form-control" type="email" name="email" id="email" placeholder="E-mail" required>
 
                     <label for="dataNascimento" class="col-form-label">Data de Nascimento:</label>
-                    <input class="form-control" type="date" id="dataNascimento" name="dataNascimento">
+                    <input class="form-control" type="text" id="dataNascimento" name="dataNascimento" oninput="formatData(this)" placeholder="DD/MM/AAAA">
 
                     <label class="col-form-label" for="sexo">Sexo:</label>
                     <select class="form-control" id="sexo" name="sexo">
@@ -169,6 +168,8 @@ if (isset($_POST['submit'])) {
     <script src="../js/cleave.min.js"></script>
     <script src="../js/cleave-phone.br.js"></script>
     <script src="../js/Cadastro.js"></script>
+    <script src="../js/formatData.js"></script>
+    <script src="../js/formatCPF.js"></script>
 
 </body>
 

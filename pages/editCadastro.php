@@ -68,7 +68,7 @@ if (!empty($_GET['id'])) {
                     <input class="form-control" type="email" name="email" id="email" placeholder="E-mail" required value="<?php echo $email ?>">
 
                     <label for="dataNascimento" class="col-form-label">Data de Nascimento:</label>
-                    <input class="form-control" type="date" id="dataNascimento" name="dataNascimento" value="<?php echo $dataNascimento ?>">
+                    <input class="form-control" type="text" id="dataNascimento" name="dataNascimento" oninput="formatData(this)" value="<?php echo $dataNascimento ?>">
 
                     <label class="col-form-label" for="sexo">Sexo:</label>
                     <select class="form-control" id="sexo" name="sexo">
@@ -152,6 +152,8 @@ if (!empty($_GET['id'])) {
     <script src="../js/cleave-phone.br.js"></script>
     <script src="../js/Cadastro.js"></script>
     <script src="../js/formatCPF.js"></script>
+    <script src="../js/formatData.js"></script>
+
 </body>
 
 </html>

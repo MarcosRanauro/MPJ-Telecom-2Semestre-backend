@@ -2,10 +2,10 @@
 session_start();
 
 if (!isset($_SESSION['usu_login']) || !isset($_SESSION['usu_senha']) || !isset($_SESSION['tipo_usuario']) || $_SESSION['tipo_usuario'] !== 'master') {
-  unset($_SESSION['usu_login']);
-  unset($_SESSION['usu_senha']);
-  unset($_SESSION['tipo_usuario']);
-  header('Location: Login.php');
+    unset($_SESSION['usu_login']);
+    unset($_SESSION['usu_senha']);
+    unset($_SESSION['tipo_usuario']);
+    header('Location: Login.php');
 }
 
 $logado_login = $_SESSION['usu_login'];
@@ -16,7 +16,7 @@ include_once('../components/config.php');
 $required_role = 'master';
 
 if ($_SESSION['role'] !== $required_role) {
-  header('Location: perfil.php');
+    header('Location: perfil.php');
 }
 
 $sql = "SELECT * FROM usuarios WHERE usu_login = :login AND usu_senha = :senha";
@@ -26,29 +26,29 @@ $stmt->bindParam(':senha', $logado_senha, PDO::PARAM_STR);
 $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
-  $row = $stmt->fetch(PDO::FETCH_ASSOC);
-  $id = $row['id'];
-  $logado_nome = $row['usu_nome'];
-  $logado_email = $row['usu_email'];
-  $logado_dataNasc = $row['usu_dataNasc'];
-  $logado_sexo = $row['usu_sexo'];
-  $logado_nomeMaterno = $row['usu_nomeMaterno'];
-  $logado_cpf = $row['usu_cpf'];
-  $logado_celular = $row['usu_celular'];
-  $logado_telefoneFixo = $row['usu_telefoneFixo'];
-  $logado_endereco = $row['usu_endereco'];
-  $logado_tipo_usuario = $row['tipo_usuario'];
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $id = $row['id'];
+    $logado_nome = $row['usu_nome'];
+    $logado_email = $row['usu_email'];
+    $logado_dataNasc = $row['usu_dataNasc'];
+    $logado_sexo = $row['usu_sexo'];
+    $logado_nomeMaterno = $row['usu_nomeMaterno'];
+    $logado_cpf = $row['usu_cpf'];
+    $logado_celular = $row['usu_celular'];
+    $logado_telefoneFixo = $row['usu_telefoneFixo'];
+    $logado_endereco = $row['usu_endereco'];
+    $logado_tipo_usuario = $row['tipo_usuario'];
 } else {
-  $logado_nome = "Não encontrado";
-  $logado_email = "Não encontrado";
-  $logado_dataNasc = "Não encontrado";
-  $logado_sexo = "Não encontrado";
-  $logado_nomeMaterno = "Não encontrado";
-  $logado_cpf = "Não encontrado";
-  $logado_celular = "Não encontrado";
-  $logado_telefoneFixo = "Não encontrado";
-  $logado_endereco = "Não encontrado";
-  $logado_tipo_usuario = "Não encontrado";
+    $logado_nome = "Não encontrado";
+    $logado_email = "Não encontrado";
+    $logado_dataNasc = "Não encontrado";
+    $logado_sexo = "Não encontrado";
+    $logado_nomeMaterno = "Não encontrado";
+    $logado_cpf = "Não encontrado";
+    $logado_celular = "Não encontrado";
+    $logado_telefoneFixo = "Não encontrado";
+    $logado_endereco = "Não encontrado";
+    $logado_tipo_usuario = "Não encontrado";
 }
 
 $sql_dadosDB = "SELECT * FROM usuarios ORDER BY usu_nome";
@@ -63,10 +63,10 @@ $stmt2->execute();
 $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
 if ($row2) {
-  $image_data = $row2['profile_image'];
-  if ($image_data !== null) {
-    $image_path = 'data:image/jpeg;base64,' . base64_encode($image_data);
-  }
+    $image_data = $row2['profile_image'];
+    if ($image_data !== null) {
+        $image_path = 'data:image/jpeg;base64,' . base64_encode($image_data);
+    }
 }
 
 ?>
@@ -121,7 +121,7 @@ if ($row2) {
         <p>Nome: <?php echo $logado_nome; ?></p>
         <p>E-Mail: <?php echo $logado_email; ?></p>
         <p>Sexo: <?php echo $logado_sexo; ?></p>
-        <p>Data de Nascimento: <?php echo formatData($logado_dataNasc); ?></p>
+        <p>Data de Nascimento: <?php echo $logado_dataNasc; ?></p>
         <p>Nome da Mãe: <?php echo $logado_nomeMaterno; ?></p>
         <p>CPF: <?php echo $logado_cpf; ?></p>
         <p>Celular: <?php echo $logado_celular; ?></p>
@@ -170,80 +170,47 @@ if ($row2) {
         <tbody>
           <?php
           while ($user_data = $result_dadosDB->fetch(PDO::FETCH_ASSOC)) {
-            echo "<tr>";
-            echo "<td data-criteria='id'>" . $user_data['id'] . "</td>";
-            echo "<td data-criteria='nome'>" . $user_data['usu_nome'] . "</td>";
-            echo "<td data-criteria='email'>" . $user_data['usu_email'] . "</td>";
-            echo "<td>" . $user_data['usu_dataNasc'] . "</td>";
-            echo "<td>" . $user_data['usu_sexo'] . "</td>";
-            echo "<td>" . $user_data['usu_nomeMaterno'] . "</td>";
-            echo "<td data-criteria='cpf'>" . $user_data['usu_cpf'] . "</td>";
-            echo "<td>" . $user_data['usu_celular'] . "</td>";
-            echo "<td>" . $user_data['usu_telefoneFixo'] . "</td>";
-            echo "<td>" . $user_data['usu_endereco'] . "</td>";
-            echo "<td>" . $user_data['usu_login'] . "</td>";
-            echo "<td>" . $user_data['usu_senha'] . "</td>";
-            echo "<td>" . $user_data['usu_confirmarSenha'] . "</td>";
-            echo "<td>" . $user_data['tipo_usuario'] . "</td>";
-            echo "<td>" . $user_data['usu_estado'] . "</td>";
-            echo "<td>
+              echo "<tr>";
+              echo "<td data-criteria='id'>" . $user_data['id'] . "</td>";
+              echo "<td data-criteria='nome'>" . $user_data['usu_nome'] . "</td>";
+              echo "<td data-criteria='email'>" . $user_data['usu_email'] . "</td>";
+              echo "<td>" . $user_data['usu_dataNasc'] . "</td>";
+              echo "<td>" . $user_data['usu_sexo'] . "</td>";
+              echo "<td>" . $user_data['usu_nomeMaterno'] . "</td>";
+              echo "<td data-criteria='cpf'>" . $user_data['usu_cpf'] . "</td>";
+              echo "<td>" . $user_data['usu_celular'] . "</td>";
+              echo "<td>" . $user_data['usu_telefoneFixo'] . "</td>";
+              echo "<td>" . $user_data['usu_endereco'] . "</td>";
+              echo "<td>" . $user_data['usu_login'] . "</td>";
+              echo "<td>" . $user_data['usu_senha'] . "</td>";
+              echo "<td>" . $user_data['usu_confirmarSenha'] . "</td>";
+              echo "<td>" . $user_data['tipo_usuario'] . "</td>";
+              echo "<td>" . $user_data['usu_estado'] . "</td>";
+              echo "<td>
                     <a class='btn btn-sm btn-primary' href='editCadastro.php?id=$user_data[id]' title='Editar'><span><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil-fill' viewBox='0 0 16 16'>
                     <path d='M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z'/>
                   </svg>Editar</span>
                   </a>
-                  <a class='btn btn-sm btn-danger' href='../components/inativo.php?id=$user_data[id]' title='Deletar'><span><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-person-fill-lock' viewBox='0 0 16 16'>
+                  <a class='btn btn-sm btn-danger' href='../components/inativo.php?id=$user_data[id]' title='Desativar'><span><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-person-fill-lock' viewBox='0 0 16 16'>
                   <path d='M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5v-1a1.9 1.9 0 0 1 .01-.2 4.49 4.49 0 0 1 1.534-3.693C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Zm7 0a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2Zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1Z'/>
                 </svg>Desativar</span>
                 </a>
-                <a class='btn btn-sm btn-success' href='../components/ativo.php?id=$user_data[id]' title='Deletar'><span><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-person-fill-add' viewBox='0 0 16 16'>
+                <a class='btn btn-sm btn-success' href='../components/ativo.php?id=$user_data[id]' title='Ativar'><span><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-person-fill-add' viewBox='0 0 16 16'>
                 <path d='M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'/>
                 <path d='M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z'/>
               </svg>Ativar</span>
                 </a>
               </td>";
-            echo "</tr>";
+              echo "</tr>";
           }
-          ?>
+?>
         </tbody>
       </table>
     </div>
   </div>
   <?php require_once('../components/footer.php'); ?>
+
+  <script src="../js/pesquisaUsuarios.js"></script>
 </body>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const selectCriteria = document.getElementById("criteria");
-    const inputPesquisar = document.getElementById("pesquisar");
-    const btnPesquisar = document.getElementById("btn-pesquisar");
-    const tabelaUsuarios = document.querySelector(".table tbody");
-
-    btnPesquisar.addEventListener("click", function() {
-      realizarPesquisa();
-    });
-
-    inputPesquisar.addEventListener("keydown", function(event) {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        realizarPesquisa();
-      }
-    });
-
-    function realizarPesquisa() {
-      const termoPesquisa = inputPesquisar.value.toLowerCase();
-      const criterio = selectCriteria.value;
-      const linhas = tabelaUsuarios.querySelectorAll("tr");
-
-      linhas.forEach(function(linha) {
-        const textoCelula = linha.querySelector(`td[data-criteria="${criterio}"]`).textContent.toLowerCase();
-
-        if (textoCelula.includes(termoPesquisa)) {
-          linha.style.display = "";
-        } else {
-          linha.style.display = "none";
-        }
-      });
-    }
-  });
-</script>
 
 </html>

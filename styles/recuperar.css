@@ -2,6 +2,22 @@
     padding: 0;
     margin: 0;
   }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  main {
+    display: flex;
+    flex: 1; /* Ocupa o espaço restante vertical */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  
+  }
+  
   .back-recuperar{
       margin-top: 10%;
       justify-content:center ;
