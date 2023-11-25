@@ -4,7 +4,7 @@
 <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
 </p>
 
-## Repositório de desenvolvimento do projeto de backend do segundo semestre de ADS - Unissuam
+## Repositório de desenvolvimento do projeto de backend do segundo semestre de ADS - Unisuam
 <br>
 <p></p>Ambiente de produção no Railway.</p>
 <p></p>Site no ar: mpjtelecom-production.up.railway.app</p>
