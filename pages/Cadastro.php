@@ -154,10 +154,11 @@ if (isset($_POST['submit'])) {
                         <label for="agreement" id="label-infos">Você concorda com o uso das informações acima?</label>
                         <input type="checkbox" name="agreement" id="agreement">
                     </fieldset>
+                    <div class="container-bttn">
+                        <input type="submit" id="submit-btn" class="submit btn btn-primary" name="submit">
 
-                    <input type="submit" id="submit-btn" class="submit btn btn-primary" name="submit">
-
-                    <input type="reset" id="reset-btn" class="reset btn btn-primary" name="reset">
+                        <input type="reset" id="reset-btn" class="reset btn btn-primary" name="reset">
+                    </div>
                 </div>
 
             </form>
