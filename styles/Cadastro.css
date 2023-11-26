@@ -81,6 +81,19 @@ body {
     margin-top: 4px;
 }
 
+.container-bttn {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.readonly {
+  background-color: #a5abb1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+
+}
+
 /* Media Query para dispositivos com largura máxima de 768px */
 @media (max-width: 1024px) {
     .cabecalho-primario {

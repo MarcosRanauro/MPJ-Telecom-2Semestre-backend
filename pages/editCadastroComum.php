@@ -63,13 +63,13 @@ if (!empty($_GET['id'])) {
           <h1>Editar Cadastro</h1>
 
           <label for="nome" class="col-form-label">Nome</label>
-          <input class="form-control" type="text" name="nome" id="nome" minlength="15" maxlength="60" require value="<?php echo $nome ?>">
+          <input class="form-control readonly" type="text" name="nome" id="nome" minlength="15" maxlength="60" require value="<?php echo $nome ?>" readonly>
 
           <label for="email" class="col-form-label">E-mail</label>
           <input class="form-control" type="email" name="email" id="email" placeholder="E-mail" required value="<?php echo $email ?>">
 
           <label for="dataNascimento" class="col-form-label">Data de Nascimento:</label>
-          <input class="form-control" type="text" id="dataNascimento" name="dataNascimento" oninput="formatData(this)" value="<?php echo $dataNascimento ?>">
+          <input class="form-control readonly" type="text" id="dataNascimento" name="dataNascimento" oninput="formatData(this)" value="<?php echo $dataNascimento ?>" readonly>
 
           <label class="col-form-label" for="sexo">Sexo:</label>
           <select class="form-control" id="sexo" name="sexo">
@@ -80,10 +80,10 @@ if (!empty($_GET['id'])) {
           </select>
 
           <label for="nomeMaterno" class="col-form-label">Nome Materno</label>
-          <input class="form-control" type="text" name="nomeMaterno" id="nomeMaterno" minlength="15" maxlength="60" value="<?php echo $nomeMaterno ?>">
+          <input class="form-control readonly" type="text" name="nomeMaterno" id="nomeMaterno" minlength="15" maxlength="60" value="<?php echo $nomeMaterno ?>" readonly>
 
           <label class=" col-form-label" for="cpf">CPF:</label>
-          <input class="form-control" type="text" id="cpf" name="cpf" placeholder="XXX.XXX.XXX-XX" oninput="formatCPF(this)" value="<?php echo $cpf ?>" required>
+          <input class="form-control readonly" type="text" id="cpf" name="cpf" placeholder="XXX.XXX.XXX-XX" oninput="formatCPF(this)" value="<?php echo $cpf ?>" readonly>
 
 
           <label for="cell-phone" class="col-form-label">Telefone Celular</label>
@@ -134,9 +134,11 @@ if (!empty($_GET['id'])) {
             <input type="checkbox" name="agreement" id="agreement">
           </fieldset>
           <input type="hidden" name="id" value="<?php echo $id ?>">
-          <input type="submit" id="update" class="submit btn btn-primary" name="update">
+          <div class="container-bttn">
+            <input type="submit" id="submit-btn" class="submit btn btn-primary" name="submit">
 
-          <input type="reset" id="reset-btn" class="reset btn btn-primary" name="reset">
+            <input type="reset" id="reset-btn" class="reset btn btn-primary" name="reset">
+          </div>
         </div>
 
       </form>

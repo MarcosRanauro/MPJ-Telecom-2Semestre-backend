@@ -33,6 +33,7 @@
       width: auto;
       height: 75%;
       box-shadow: 3px 3px 3px rgb(73, 68, 68);
+      padding: 100px;
   }
   .painel img{
       text-align: center;

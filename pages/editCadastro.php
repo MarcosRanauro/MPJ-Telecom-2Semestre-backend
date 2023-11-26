@@ -139,9 +139,11 @@ if (!empty($_GET['id'])) {
                         <input type="checkbox" name="agreement" id="agreement">
                     </fieldset>
                     <input type="hidden" name="id" value="<?php echo $id ?>">
-                    <input type="submit" id="update" class="submit btn btn-primary" name="update">
+                    <div class="container-bttn">
+                        <input type="submit" id="submit-btn" class="submit btn btn-primary" name="submit">
 
-                    <input type="reset" id="reset-btn" class="reset btn btn-primary" name="reset">
+                        <input type="reset" id="reset-btn" class="reset btn btn-primary" name="reset">
+                    </div>
                 </div>
 
             </form>
