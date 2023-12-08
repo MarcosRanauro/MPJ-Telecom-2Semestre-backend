@@ -61,7 +61,6 @@ if (!empty($_GET['id'])) {
       <form action="../components/saveEditComum.php" method="POST" class="container" id="form">
         <div class="form-control form-control-lg input-container">
           <h1>Editar Cadastro</h1>
-
           <label for="nome" class="col-form-label">Nome</label>
           <input class="form-control readonly" type="text" name="nome" id="nome" minlength="15" maxlength="60" require value="<?php echo $nome ?>" readonly>
 
@@ -128,11 +127,11 @@ if (!empty($_GET['id'])) {
             </span>
           </div>
 
-          <span id="confirm-password-error" class="error-message"></span>
+          <!-- <span id="confirm-password-error" class="error-message"></span>
           <fieldset class="main-agreement">
             <label for="agreement" id="label-infos">Você concorda com o uso das informações acima?</label>
             <input type="checkbox" name="agreement" id="agreement">
-          </fieldset>
+          </fieldset> -->
           <input type="hidden" name="id" value="<?php echo $id ?>">
           <div class="container-bttn">
             <input type="submit" id="submit-btn" class="submit btn btn-primary" name="submit">

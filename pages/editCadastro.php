@@ -133,11 +133,11 @@ if (!empty($_GET['id'])) {
                         <option value="comum" <?php echo ($tipoUsuario == 'comum') ? 'selected' : '' ?>>Comum</option>
                     </select>
 
-                    <span id="confirm-password-error" class="error-message"></span>
+                    <!-- <span id="confirm-password-error" class="error-message"></span>
                     <fieldset class="main-agreement">
                         <label for="agreement" id="label-infos">Você concorda com o uso das informações acima?</label>
                         <input type="checkbox" name="agreement" id="agreement">
-                    </fieldset>
+                    </fieldset> -->
                     <input type="hidden" name="id" value="<?php echo $id ?>">
                     <div class="container-bttn">
                         <input type="submit" id="submit-btn" class="submit btn btn-primary" name="submit">

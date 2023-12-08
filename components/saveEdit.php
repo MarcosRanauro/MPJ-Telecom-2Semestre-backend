@@ -1,7 +1,7 @@
 <?php
   include_once('config.php');
 
-  if(isset($_POST['update'])) {
+  if(isset($_POST['submit'])) {
     $id = $_POST['id'];
     $nome = $_POST['nome'];
     $email = $_POST['email'];

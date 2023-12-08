@@ -17,6 +17,7 @@ if (isset($_POST['submit']) && !empty($_POST['cpf']) && !empty($_POST['email']))
     if ($stmt && $stmt->rowCount() > 0) {
         $_SESSION['usu_cpf'] = $cpf;
         $_SESSION['usu_email'] = $email;
+        $_SESSION['tipo_usuario'] = $tipo_usuario;
         header('Location: alterarSenha.php');
     } else {
         unset($_SESSION['usu_cpf']);
@@ -43,11 +44,7 @@ if (isset($_POST['submit']) && !empty($_POST['cpf']) && !empty($_POST['email']))
 </head>
 
 <body>
-    <?php if ($_SESSION['tipo_usuario']) { ?>
-        <?php require_once('../components/header.php'); ?>
-    <?php } else { ?>
-        <?php require_once('../components/headerDefault.php'); ?>
-    <?php } ?>
+    <?php require_once('../components/headerDefault.php'); ?>
     <main class="container">
         <form class="recuperar-senha" action="Recuperar.php" method="POST">
             <div class="painel">

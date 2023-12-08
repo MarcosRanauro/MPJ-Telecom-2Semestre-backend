@@ -1,14 +1,17 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['usu_cpf']) && !isset($_SESSION['usu_email'])) {
+if (!isset($_SESSION['usu_cpf']) && !isset($_SESSION['usu_email']) && !isset($_SESSION['tipo_usuario'])) {
   unset($_SESSION['usu_cpf']);
   unset($_SESSION['usu_email']);
+  unset($_SESSION['tipo_usuario']);
   header('Location: Recuperar.php');
 }
 
 $logado_recuperar_cpf = $_SESSION['usu_cpf'];
 $logado_recuperar_email = $_SESSION['usu_email'];
+$logado_tipo_usuario = $_SESSION['tipo_usuario'];
+print_r($logado_tipo_usuario);
 
 if (isset($_POST['submit']) && !empty($_POST['novaSenha']) && !empty($_POST['confirmarSenha'])) {
   include_once('../components/config.php');
